@@ -1,0 +1,4 @@
+common:
+  port: 9010
+  username: admin
+  password: admin
