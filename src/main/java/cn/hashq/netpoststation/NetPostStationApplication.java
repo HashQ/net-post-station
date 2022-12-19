@@ -10,7 +10,6 @@ public class NetPostStationApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NetPostStationApplication.class, args);
-
     }
 
 }
