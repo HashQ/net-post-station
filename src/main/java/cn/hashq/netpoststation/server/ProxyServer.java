@@ -1,7 +1,9 @@
 package cn.hashq.netpoststation.server;
 
 import cn.hashq.netpoststation.handler.AuthHandler;
+import cn.hashq.netpoststation.handler.ExceptionHandler;
 import cn.hashq.netpoststation.handler.ProtobufDecoder;
+import cn.hashq.netpoststation.handler.ProtobufEncoder;
 import cn.hashq.netpoststation.util.NettyUtil;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -33,12 +35,17 @@ public class ProxyServer {
     @Resource
     private AuthHandler authHandler;
 
+    @Resource
+    private ExceptionHandler exceptionHandler;
+
     public void run(int port) {
         ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel socketChannel) throws Exception {
-                socketChannel.pipeline().addFirst("decoder", new ProtobufDecoder());
+                socketChannel.pipeline().addLast("decoder", new ProtobufDecoder());
+                socketChannel.pipeline().addLast("encoder", new ProtobufEncoder());
                 socketChannel.pipeline().addLast("auth", authHandler);
+                socketChannel.pipeline().addLast(exceptionHandler);
             }
         };
         ChannelFutureListener channelFutureListener = new ChannelFutureListener() {
