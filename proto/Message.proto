@@ -1,0 +1,40 @@
+syntax = 'proto3';
+package cn.hashq.netpoststation.dto;
+
+/*消息类型*/
+enum HeadType{
+  AUTH = 0;
+  DATA_REDIRECT = 1;
+  HEART_BEAT = 2;
+  CONFIG = 3;
+  SERVICE_PAUSE = 4;
+}
+
+message Config{
+  uint32 port = 1;
+}
+
+message Auth{
+  string secret = 1;
+}
+
+message AuthResponse{
+  bool result = 1;
+  uint32 code = 2;
+  string info = 3;
+}
+
+message DataPackage{
+  uint32 type = 1;
+  bytes bytes = 2;
+}
+
+message Message{
+  HeadType type = 1;
+  uint64 sequence = 2;
+  string session_id = 3;
+  Config config = 4;
+  Auth auth = 5;
+  AuthResponse response = 6;
+  DataPackage body = 7;
+}
