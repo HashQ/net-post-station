@@ -1,5 +1,6 @@
 syntax = 'proto3';
 package cn.hashq.netpoststation.dto;
+option java_outer_classname = 'ProtoMsg';
 
 /*消息类型*/
 enum HeadType{
@@ -16,6 +17,10 @@ message Config{
 
 message Auth{
   string secret = 1;
+}
+
+message HeartBody{
+  string body = 1;
 }
 
 message AuthResponse{
@@ -37,4 +42,5 @@ message Message{
   Auth auth = 5;
   AuthResponse response = 6;
   DataPackage body = 7;
+  HeartBody heart = 8;
 }
