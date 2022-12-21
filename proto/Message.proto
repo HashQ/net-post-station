@@ -31,7 +31,8 @@ message AuthResponse{
 
 message DataPackage{
   uint32 type = 1;
-  bytes bytes = 2;
+  uint32 port = 2;
+  bytes bytes = 3;
 }
 
 message Message{
