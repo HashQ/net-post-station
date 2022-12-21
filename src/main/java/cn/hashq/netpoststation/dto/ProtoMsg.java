@@ -1169,6 +1169,556 @@ public final class ProtoMsg {
 
   }
 
+  public interface HeartBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:cn.hashq.netpoststation.dto.HeartBody)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string body = 1;</code>
+     */
+    java.lang.String getBody();
+    /**
+     * <code>string body = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getBodyBytes();
+  }
+  /**
+   * Protobuf type {@code cn.hashq.netpoststation.dto.HeartBody}
+   */
+  public  static final class HeartBody extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:cn.hashq.netpoststation.dto.HeartBody)
+      HeartBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use HeartBody.newBuilder() to construct.
+    private HeartBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private HeartBody() {
+      body_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private HeartBody(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              body_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ProtoMsg.internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ProtoMsg.internal_static_cn_hashq_netpoststation_dto_HeartBody_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ProtoMsg.HeartBody.class, ProtoMsg.HeartBody.Builder.class);
+    }
+
+    public static final int BODY_FIELD_NUMBER = 1;
+    private volatile java.lang.Object body_;
+    /**
+     * <code>string body = 1;</code>
+     */
+    public java.lang.String getBody() {
+      java.lang.Object ref = body_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        body_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string body = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBodyBytes() {
+      java.lang.Object ref = body_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        body_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getBodyBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, body_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getBodyBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, body_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ProtoMsg.HeartBody)) {
+        return super.equals(obj);
+      }
+      ProtoMsg.HeartBody other = (ProtoMsg.HeartBody) obj;
+
+      boolean result = true;
+      result = result && getBody()
+          .equals(other.getBody());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + BODY_FIELD_NUMBER;
+      hash = (53 * hash) + getBody().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ProtoMsg.HeartBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ProtoMsg.HeartBody parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ProtoMsg.HeartBody parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ProtoMsg.HeartBody parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ProtoMsg.HeartBody parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ProtoMsg.HeartBody parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ProtoMsg.HeartBody prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code cn.hashq.netpoststation.dto.HeartBody}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:cn.hashq.netpoststation.dto.HeartBody)
+        ProtoMsg.HeartBodyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ProtoMsg.internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ProtoMsg.internal_static_cn_hashq_netpoststation_dto_HeartBody_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ProtoMsg.HeartBody.class, ProtoMsg.HeartBody.Builder.class);
+      }
+
+      // Construct using cn.hashq.netpoststation.dto.MessageOuterClass.HeartBody.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        body_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ProtoMsg.internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor;
+      }
+
+      @java.lang.Override
+      public ProtoMsg.HeartBody getDefaultInstanceForType() {
+        return ProtoMsg.HeartBody.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ProtoMsg.HeartBody build() {
+        ProtoMsg.HeartBody result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ProtoMsg.HeartBody buildPartial() {
+        ProtoMsg.HeartBody result = new ProtoMsg.HeartBody(this);
+        result.body_ = body_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ProtoMsg.HeartBody) {
+          return mergeFrom((ProtoMsg.HeartBody)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ProtoMsg.HeartBody other) {
+        if (other == ProtoMsg.HeartBody.getDefaultInstance()) return this;
+        if (!other.getBody().isEmpty()) {
+          body_ = other.body_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ProtoMsg.HeartBody parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ProtoMsg.HeartBody) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object body_ = "";
+      /**
+       * <code>string body = 1;</code>
+       */
+      public java.lang.String getBody() {
+        java.lang.Object ref = body_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          body_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string body = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBodyBytes() {
+        java.lang.Object ref = body_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          body_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string body = 1;</code>
+       */
+      public Builder setBody(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        body_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string body = 1;</code>
+       */
+      public Builder clearBody() {
+        
+        body_ = getDefaultInstance().getBody();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string body = 1;</code>
+       */
+      public Builder setBodyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        body_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:cn.hashq.netpoststation.dto.HeartBody)
+    }
+
+    // @@protoc_insertion_point(class_scope:cn.hashq.netpoststation.dto.HeartBody)
+    private static final ProtoMsg.HeartBody DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ProtoMsg.HeartBody();
+    }
+
+    public static ProtoMsg.HeartBody getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<HeartBody>
+        PARSER = new com.google.protobuf.AbstractParser<HeartBody>() {
+      @java.lang.Override
+      public HeartBody parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new HeartBody(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<HeartBody> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<HeartBody> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ProtoMsg.HeartBody getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface AuthResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:cn.hashq.netpoststation.dto.AuthResponse)
       com.google.protobuf.MessageOrBuilder {
@@ -2467,6 +3017,19 @@ public final class ProtoMsg {
      * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
      */
     ProtoMsg.DataPackageOrBuilder getBodyOrBuilder();
+
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    boolean hasHeart();
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    ProtoMsg.HeartBody getHeart();
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    ProtoMsg.HeartBodyOrBuilder getHeartOrBuilder();
   }
   /**
    * Protobuf type {@code cn.hashq.netpoststation.dto.Message}
@@ -2575,6 +3138,19 @@ public final class ProtoMsg {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(body_);
                 body_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 66: {
+              ProtoMsg.HeartBody.Builder subBuilder = null;
+              if (heart_ != null) {
+                subBuilder = heart_.toBuilder();
+              }
+              heart_ = input.readMessage(ProtoMsg.HeartBody.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(heart_);
+                heart_ = subBuilder.buildPartial();
               }
 
               break;
@@ -2755,6 +3331,27 @@ public final class ProtoMsg {
       return getBody();
     }
 
+    public static final int HEART_FIELD_NUMBER = 8;
+    private ProtoMsg.HeartBody heart_;
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    public boolean hasHeart() {
+      return heart_ != null;
+    }
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    public ProtoMsg.HeartBody getHeart() {
+      return heart_ == null ? ProtoMsg.HeartBody.getDefaultInstance() : heart_;
+    }
+    /**
+     * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+     */
+    public ProtoMsg.HeartBodyOrBuilder getHeartOrBuilder() {
+      return getHeart();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2789,6 +3386,9 @@ public final class ProtoMsg {
       }
       if (body_ != null) {
         output.writeMessage(7, getBody());
+      }
+      if (heart_ != null) {
+        output.writeMessage(8, getHeart());
       }
       unknownFields.writeTo(output);
     }
@@ -2825,6 +3425,10 @@ public final class ProtoMsg {
       if (body_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getBody());
+      }
+      if (heart_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getHeart());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2867,6 +3471,11 @@ public final class ProtoMsg {
         result = result && getBody()
             .equals(other.getBody());
       }
+      result = result && (hasHeart() == other.hasHeart());
+      if (hasHeart()) {
+        result = result && getHeart()
+            .equals(other.getHeart());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2900,6 +3509,10 @@ public final class ProtoMsg {
       if (hasBody()) {
         hash = (37 * hash) + BODY_FIELD_NUMBER;
         hash = (53 * hash) + getBody().hashCode();
+      }
+      if (hasHeart()) {
+        hash = (37 * hash) + HEART_FIELD_NUMBER;
+        hash = (53 * hash) + getHeart().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3064,6 +3677,12 @@ public final class ProtoMsg {
           body_ = null;
           bodyBuilder_ = null;
         }
+        if (heartBuilder_ == null) {
+          heart_ = null;
+        } else {
+          heart_ = null;
+          heartBuilder_ = null;
+        }
         return this;
       }
 
@@ -3112,6 +3731,11 @@ public final class ProtoMsg {
           result.body_ = body_;
         } else {
           result.body_ = bodyBuilder_.build();
+        }
+        if (heartBuilder_ == null) {
+          result.heart_ = heart_;
+        } else {
+          result.heart_ = heartBuilder_.build();
         }
         onBuilt();
         return result;
@@ -3182,6 +3806,9 @@ public final class ProtoMsg {
         }
         if (other.hasBody()) {
           mergeBody(other.getBody());
+        }
+        if (other.hasHeart()) {
+          mergeHeart(other.getHeart());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3819,6 +4446,123 @@ public final class ProtoMsg {
         }
         return bodyBuilder_;
       }
+
+      private ProtoMsg.HeartBody heart_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ProtoMsg.HeartBody, ProtoMsg.HeartBody.Builder, ProtoMsg.HeartBodyOrBuilder> heartBuilder_;
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public boolean hasHeart() {
+        return heartBuilder_ != null || heart_ != null;
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public ProtoMsg.HeartBody getHeart() {
+        if (heartBuilder_ == null) {
+          return heart_ == null ? ProtoMsg.HeartBody.getDefaultInstance() : heart_;
+        } else {
+          return heartBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public Builder setHeart(ProtoMsg.HeartBody value) {
+        if (heartBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          heart_ = value;
+          onChanged();
+        } else {
+          heartBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public Builder setHeart(
+          ProtoMsg.HeartBody.Builder builderForValue) {
+        if (heartBuilder_ == null) {
+          heart_ = builderForValue.build();
+          onChanged();
+        } else {
+          heartBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public Builder mergeHeart(ProtoMsg.HeartBody value) {
+        if (heartBuilder_ == null) {
+          if (heart_ != null) {
+            heart_ =
+              ProtoMsg.HeartBody.newBuilder(heart_).mergeFrom(value).buildPartial();
+          } else {
+            heart_ = value;
+          }
+          onChanged();
+        } else {
+          heartBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public Builder clearHeart() {
+        if (heartBuilder_ == null) {
+          heart_ = null;
+          onChanged();
+        } else {
+          heart_ = null;
+          heartBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public ProtoMsg.HeartBody.Builder getHeartBuilder() {
+        
+        onChanged();
+        return getHeartFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      public ProtoMsg.HeartBodyOrBuilder getHeartOrBuilder() {
+        if (heartBuilder_ != null) {
+          return heartBuilder_.getMessageOrBuilder();
+        } else {
+          return heart_ == null ?
+              ProtoMsg.HeartBody.getDefaultInstance() : heart_;
+        }
+      }
+      /**
+       * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ProtoMsg.HeartBody, ProtoMsg.HeartBody.Builder, ProtoMsg.HeartBodyOrBuilder>
+          getHeartFieldBuilder() {
+        if (heartBuilder_ == null) {
+          heartBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              ProtoMsg.HeartBody, ProtoMsg.HeartBody.Builder, ProtoMsg.HeartBodyOrBuilder>(
+                  getHeart(),
+                  getParentForChildren(),
+                  isClean());
+          heart_ = null;
+        }
+        return heartBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3883,6 +4627,11 @@ public final class ProtoMsg {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_cn_hashq_netpoststation_dto_Auth_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_cn_hashq_netpoststation_dto_HeartBody_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_cn_hashq_netpoststation_dto_AuthResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3908,20 +4657,22 @@ public final class ProtoMsg {
     java.lang.String[] descriptorData = {
       "\n\rMessage.proto\022\033cn.hashq.netpoststation" +
       ".dto\"\026\n\006Config\022\014\n\004port\030\001 \001(\r\"\026\n\004Auth\022\016\n\006" +
-      "secret\030\001 \001(\t\":\n\014AuthResponse\022\016\n\006result\030\001" +
-      " \001(\010\022\014\n\004code\030\002 \001(\r\022\014\n\004info\030\003 \001(\t\"*\n\013Data" +
-      "Package\022\014\n\004type\030\001 \001(\r\022\r\n\005bytes\030\002 \001(\014\"\277\002\n" +
-      "\007Message\0223\n\004type\030\001 \001(\0162%.cn.hashq.netpos" +
-      "tstation.dto.HeadType\022\020\n\010sequence\030\002 \001(\004\022" +
-      "\022\n\nsession_id\030\003 \001(\t\0223\n\006config\030\004 \001(\0132#.cn" +
-      ".hashq.netpoststation.dto.Config\022/\n\004auth" +
-      "\030\005 \001(\0132!.cn.hashq.netpoststation.dto.Aut" +
-      "h\022;\n\010response\030\006 \001(\0132).cn.hashq.netpostst" +
-      "ation.dto.AuthResponse\0226\n\004body\030\007 \001(\0132(.c" +
-      "n.hashq.netpoststation.dto.DataPackage*V" +
-      "\n\010HeadType\022\010\n\004AUTH\020\000\022\021\n\rDATA_REDIRECT\020\001\022" +
-      "\016\n\nHEART_BEAT\020\002\022\n\n\006CONFIG\020\003\022\021\n\rSERVICE_P" +
-      "AUSE\020\004b\006proto3"
+      "secret\030\001 \001(\t\"\031\n\tHeartBody\022\014\n\004body\030\001 \001(\t\"" +
+      ":\n\014AuthResponse\022\016\n\006result\030\001 \001(\010\022\014\n\004code\030" +
+      "\002 \001(\r\022\014\n\004info\030\003 \001(\t\"*\n\013DataPackage\022\014\n\004ty" +
+      "pe\030\001 \001(\r\022\r\n\005bytes\030\002 \001(\014\"\366\002\n\007Message\0223\n\004t" +
+      "ype\030\001 \001(\0162%.cn.hashq.netpoststation.dto." +
+      "HeadType\022\020\n\010sequence\030\002 \001(\004\022\022\n\nsession_id" +
+      "\030\003 \001(\t\0223\n\006config\030\004 \001(\0132#.cn.hashq.netpos" +
+      "tstation.dto.Config\022/\n\004auth\030\005 \001(\0132!.cn.h" +
+      "ashq.netpoststation.dto.Auth\022;\n\010response" +
+      "\030\006 \001(\0132).cn.hashq.netpoststation.dto.Aut" +
+      "hResponse\0226\n\004body\030\007 \001(\0132(.cn.hashq.netpo" +
+      "ststation.dto.DataPackage\0225\n\005heart\030\010 \001(\013" +
+      "2&.cn.hashq.netpoststation.dto.HeartBody" +
+      "*V\n\010HeadType\022\010\n\004AUTH\020\000\022\021\n\rDATA_REDIRECT\020" +
+      "\001\022\016\n\nHEART_BEAT\020\002\022\n\n\006CONFIG\020\003\022\021\n\rSERVICE" +
+      "_PAUSE\020\004b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3947,24 +4698,30 @@ public final class ProtoMsg {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_Auth_descriptor,
         new java.lang.String[] { "Secret", });
-    internal_static_cn_hashq_netpoststation_dto_AuthResponse_descriptor =
+    internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_cn_hashq_netpoststation_dto_HeartBody_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_cn_hashq_netpoststation_dto_HeartBody_descriptor,
+        new java.lang.String[] { "Body", });
+    internal_static_cn_hashq_netpoststation_dto_AuthResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_cn_hashq_netpoststation_dto_AuthResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_AuthResponse_descriptor,
         new java.lang.String[] { "Result", "Code", "Info", });
     internal_static_cn_hashq_netpoststation_dto_DataPackage_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_cn_hashq_netpoststation_dto_DataPackage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_DataPackage_descriptor,
         new java.lang.String[] { "Type", "Bytes", });
     internal_static_cn_hashq_netpoststation_dto_Message_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_cn_hashq_netpoststation_dto_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_Message_descriptor,
-        new java.lang.String[] { "Type", "Sequence", "SessionId", "Config", "Auth", "Response", "Body", });
+        new java.lang.String[] { "Type", "Sequence", "SessionId", "Config", "Auth", "Response", "Body", "Heart", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
