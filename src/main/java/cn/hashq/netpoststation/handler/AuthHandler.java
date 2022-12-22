@@ -27,31 +27,27 @@ import java.util.Optional;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class AuthHandler extends ChannelInboundHandlerAdapter {
+public class AuthHandler extends BaseHandler {
 
     @Resource
-    private DataRedirectHandler dataRedirectHandler;
+    private ClientDataRedirectHandler dataRedirectHandler;
+
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (Objects.isNull(msg) || !(msg instanceof ProtoMsg.Message)) {
-            super.channelRead(ctx, msg);
-            return;
-        }
-        ProtoMsg.Message pkg = (ProtoMsg.Message) msg;
-        ProtoMsg.HeadType type = pkg.getType();
-        if (!type.equals(ProtoMsg.HeadType.AUTH)) {
-            super.channelRead(ctx, msg);
-            return;
-        }
+    public ProtoMsg.HeadType getHeadType() {
+        return ProtoMsg.HeadType.AUTH;
+    }
+
+    @Override
+    public void process(ChannelHandlerContext ctx, ProtoMsg.Message msg) {
         ServerSession session = new ServerSession(ctx.channel());
         CallbackTaskSchedule.add(new CallbackTask<Boolean>() {
             @Override
             public Boolean execute() throws Exception {
                 // 判断客户端是否存在
-                String secret = pkg.getAuth().getSecret();
+                String secret = msg.getAuth().getSecret();
                 Client client = ClientCache.getInstance().getClientBySecret(secret);
-                long seq = pkg.getSequence();
+                long seq = msg.getSequence();
                 if (Objects.isNull(client)) {
                     session.writeAndFlush(buildAuthResponse(seq, session, ProtoConstant.ResultCode.AUTH_FAILED));
                     return false;

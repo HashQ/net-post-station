@@ -1,10 +1,14 @@
 package cn.hashq.netpoststation.entity;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 客户端实体
+ *
+ * @author HashQ
+ * @since 1.0
+ */
 @Data
-@Slf4j
 public class Client {
 
     /**
