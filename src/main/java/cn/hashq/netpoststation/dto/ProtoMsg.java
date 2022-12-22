@@ -28,9 +28,9 @@ public final class ProtoMsg {
      */
     AUTH(0),
     /**
-     * <code>DATA_REDIRECT = 1;</code>
+     * <code>CLIENT_DATA_REDIRECT = 1;</code>
      */
-    DATA_REDIRECT(1),
+    CLIENT_DATA_REDIRECT(1),
     /**
      * <code>HEART_BEAT = 2;</code>
      */
@@ -55,9 +55,9 @@ public final class ProtoMsg {
      */
     public static final int AUTH_VALUE = 0;
     /**
-     * <code>DATA_REDIRECT = 1;</code>
+     * <code>CLIENT_DATA_REDIRECT = 1;</code>
      */
-    public static final int DATA_REDIRECT_VALUE = 1;
+    public static final int CLIENT_DATA_REDIRECT_VALUE = 1;
     /**
      * <code>HEART_BEAT = 2;</code>
      */
@@ -95,7 +95,7 @@ public final class ProtoMsg {
     public static HeadType forNumber(int value) {
       switch (value) {
         case 0: return AUTH;
-        case 1: return DATA_REDIRECT;
+        case 1: return CLIENT_DATA_REDIRECT;
         case 2: return HEART_BEAT;
         case 3: return CONFIG;
         case 4: return SERVICE_PAUSE;
@@ -4742,10 +4742,10 @@ public final class ProtoMsg {
       "tation.dto.AuthResponse\0226\n\004body\030\007 \001(\0132(." +
       "cn.hashq.netpoststation.dto.DataPackage\022" +
       "5\n\005heart\030\010 \001(\0132&.cn.hashq.netpoststation" +
-      ".dto.HeartBody*i\n\010HeadType\022\010\n\004AUTH\020\000\022\021\n\r" +
-      "DATA_REDIRECT\020\001\022\016\n\nHEART_BEAT\020\002\022\n\n\006CONFI" +
-      "G\020\003\022\021\n\rSERVICE_PAUSE\020\004\022\021\n\rAUTH_RESPONSE\020" +
-      "\005B\nB\010ProtoMsgb\006proto3"
+      ".dto.HeartBody*p\n\010HeadType\022\010\n\004AUTH\020\000\022\030\n\024" +
+      "CLIENT_DATA_REDIRECT\020\001\022\016\n\nHEART_BEAT\020\002\022\n" +
+      "\n\006CONFIG\020\003\022\021\n\rSERVICE_PAUSE\020\004\022\021\n\rAUTH_RE" +
+      "SPONSE\020\005B\nB\010ProtoMsgb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

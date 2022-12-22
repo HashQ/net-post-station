@@ -16,5 +16,5 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class DataRedirectHandler extends ChannelInboundHandlerAdapter {
+public class ClientDataRedirectHandler extends ChannelInboundHandlerAdapter {
 }

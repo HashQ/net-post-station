@@ -30,7 +30,7 @@ import java.util.Optional;
 public class AuthHandler extends ChannelInboundHandlerAdapter {
 
     @Resource
-    private DataRedirectHandler dataRedirectHandler;
+    private ClientDataRedirectHandler dataRedirectHandler;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
