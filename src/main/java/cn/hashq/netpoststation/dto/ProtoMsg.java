@@ -32,21 +32,25 @@ public final class ProtoMsg {
      */
     CLIENT_DATA_REDIRECT(1),
     /**
-     * <code>HEART_BEAT = 2;</code>
+     * <code>SERVER_DATA_REDIRECT = 2;</code>
      */
-    HEART_BEAT(2),
+    SERVER_DATA_REDIRECT(2),
     /**
-     * <code>CONFIG = 3;</code>
+     * <code>HEART_BEAT = 3;</code>
      */
-    CONFIG(3),
+    HEART_BEAT(3),
     /**
-     * <code>SERVICE_PAUSE = 4;</code>
+     * <code>CONFIG = 4;</code>
      */
-    SERVICE_PAUSE(4),
+    CONFIG(4),
     /**
-     * <code>AUTH_RESPONSE = 5;</code>
+     * <code>SERVICE_PAUSE = 5;</code>
      */
-    AUTH_RESPONSE(5),
+    SERVICE_PAUSE(5),
+    /**
+     * <code>AUTH_RESPONSE = 6;</code>
+     */
+    AUTH_RESPONSE(6),
     UNRECOGNIZED(-1),
     ;
 
@@ -59,21 +63,25 @@ public final class ProtoMsg {
      */
     public static final int CLIENT_DATA_REDIRECT_VALUE = 1;
     /**
-     * <code>HEART_BEAT = 2;</code>
+     * <code>SERVER_DATA_REDIRECT = 2;</code>
      */
-    public static final int HEART_BEAT_VALUE = 2;
+    public static final int SERVER_DATA_REDIRECT_VALUE = 2;
     /**
-     * <code>CONFIG = 3;</code>
+     * <code>HEART_BEAT = 3;</code>
      */
-    public static final int CONFIG_VALUE = 3;
+    public static final int HEART_BEAT_VALUE = 3;
     /**
-     * <code>SERVICE_PAUSE = 4;</code>
+     * <code>CONFIG = 4;</code>
      */
-    public static final int SERVICE_PAUSE_VALUE = 4;
+    public static final int CONFIG_VALUE = 4;
     /**
-     * <code>AUTH_RESPONSE = 5;</code>
+     * <code>SERVICE_PAUSE = 5;</code>
      */
-    public static final int AUTH_RESPONSE_VALUE = 5;
+    public static final int SERVICE_PAUSE_VALUE = 5;
+    /**
+     * <code>AUTH_RESPONSE = 6;</code>
+     */
+    public static final int AUTH_RESPONSE_VALUE = 6;
 
 
     public final int getNumber() {
@@ -96,10 +104,11 @@ public final class ProtoMsg {
       switch (value) {
         case 0: return AUTH;
         case 1: return CLIENT_DATA_REDIRECT;
-        case 2: return HEART_BEAT;
-        case 3: return CONFIG;
-        case 4: return SERVICE_PAUSE;
-        case 5: return AUTH_RESPONSE;
+        case 2: return SERVER_DATA_REDIRECT;
+        case 3: return HEART_BEAT;
+        case 4: return CONFIG;
+        case 5: return SERVICE_PAUSE;
+        case 6: return AUTH_RESPONSE;
         default: return null;
       }
     }
@@ -150,6 +159,104 @@ public final class ProtoMsg {
     }
 
     // @@protoc_insertion_point(enum_scope:cn.hashq.netpoststation.dto.HeadType)
+  }
+
+  /**
+   * Protobuf enum {@code cn.hashq.netpoststation.dto.DataPackageType}
+   */
+  public enum DataPackageType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>FROM_SERVER = 0;</code>
+     */
+    FROM_SERVER(0),
+    /**
+     * <code>FROM_CLIENT = 1;</code>
+     */
+    FROM_CLIENT(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>FROM_SERVER = 0;</code>
+     */
+    public static final int FROM_SERVER_VALUE = 0;
+    /**
+     * <code>FROM_CLIENT = 1;</code>
+     */
+    public static final int FROM_CLIENT_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static DataPackageType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static DataPackageType forNumber(int value) {
+      switch (value) {
+        case 0: return FROM_SERVER;
+        case 1: return FROM_CLIENT;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<DataPackageType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        DataPackageType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<DataPackageType>() {
+            public DataPackageType findValueByNumber(int number) {
+              return DataPackageType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return cn.hashq.netpoststation.dto.ProtoMsg.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final DataPackageType[] VALUES = values();
+
+    public static DataPackageType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private DataPackageType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:cn.hashq.netpoststation.dto.DataPackageType)
   }
 
   public interface ConfigOrBuilder extends
@@ -2410,11 +2517,6 @@ public final class ProtoMsg {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 type = 1;</code>
-     */
-    int getType();
-
-    /**
      * <code>uint32 port = 2;</code>
      */
     int getPort();
@@ -2437,7 +2539,6 @@ public final class ProtoMsg {
       super(builder);
     }
     private DataPackage() {
-      type_ = 0;
       port_ = 0;
       bytes_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -2466,11 +2567,6 @@ public final class ProtoMsg {
             case 0:
               done = true;
               break;
-            case 8: {
-
-              type_ = input.readUInt32();
-              break;
-            }
             case 16: {
 
               port_ = input.readUInt32();
@@ -2513,15 +2609,6 @@ public final class ProtoMsg {
               cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.class, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder.class);
     }
 
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
-    /**
-     * <code>uint32 type = 1;</code>
-     */
-    public int getType() {
-      return type_;
-    }
-
     public static final int PORT_FIELD_NUMBER = 2;
     private int port_;
     /**
@@ -2554,9 +2641,6 @@ public final class ProtoMsg {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (type_ != 0) {
-        output.writeUInt32(1, type_);
-      }
       if (port_ != 0) {
         output.writeUInt32(2, port_);
       }
@@ -2572,10 +2656,6 @@ public final class ProtoMsg {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, type_);
-      }
       if (port_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, port_);
@@ -2600,8 +2680,6 @@ public final class ProtoMsg {
       cn.hashq.netpoststation.dto.ProtoMsg.DataPackage other = (cn.hashq.netpoststation.dto.ProtoMsg.DataPackage) obj;
 
       boolean result = true;
-      result = result && (getType()
-          == other.getType());
       result = result && (getPort()
           == other.getPort());
       result = result && getBytes()
@@ -2617,8 +2695,6 @@ public final class ProtoMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getType();
       hash = (37 * hash) + PORT_FIELD_NUMBER;
       hash = (53 * hash) + getPort();
       hash = (37 * hash) + BYTES_FIELD_NUMBER;
@@ -2756,8 +2832,6 @@ public final class ProtoMsg {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        type_ = 0;
-
         port_ = 0;
 
         bytes_ = com.google.protobuf.ByteString.EMPTY;
@@ -2788,7 +2862,6 @@ public final class ProtoMsg {
       @java.lang.Override
       public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage buildPartial() {
         cn.hashq.netpoststation.dto.ProtoMsg.DataPackage result = new cn.hashq.netpoststation.dto.ProtoMsg.DataPackage(this);
-        result.type_ = type_;
         result.port_ = port_;
         result.bytes_ = bytes_;
         onBuilt();
@@ -2839,9 +2912,6 @@ public final class ProtoMsg {
 
       public Builder mergeFrom(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage other) {
         if (other == cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance()) return this;
-        if (other.getType() != 0) {
-          setType(other.getType());
-        }
         if (other.getPort() != 0) {
           setPort(other.getPort());
         }
@@ -2874,32 +2944,6 @@ public final class ProtoMsg {
             mergeFrom(parsedMessage);
           }
         }
-        return this;
-      }
-
-      private int type_ ;
-      /**
-       * <code>uint32 type = 1;</code>
-       */
-      public int getType() {
-        return type_;
-      }
-      /**
-       * <code>uint32 type = 1;</code>
-       */
-      public Builder setType(int value) {
-        
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 type = 1;</code>
-       */
-      public Builder clearType() {
-        
-        type_ = 0;
-        onChanged();
         return this;
       }
 
@@ -3078,17 +3122,17 @@ public final class ProtoMsg {
     cn.hashq.netpoststation.dto.ProtoMsg.AuthResponseOrBuilder getResponseOrBuilder();
 
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    boolean hasBody();
+    boolean hasDataPackage();
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getBody();
+    cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getDataPackage();
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getBodyOrBuilder();
+    cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getDataPackageOrBuilder();
 
     /**
      * <code>.cn.hashq.netpoststation.dto.HeartBody heart = 8;</code>
@@ -3203,13 +3247,13 @@ public final class ProtoMsg {
             }
             case 58: {
               cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder subBuilder = null;
-              if (body_ != null) {
-                subBuilder = body_.toBuilder();
+              if (dataPackage_ != null) {
+                subBuilder = dataPackage_.toBuilder();
               }
-              body_ = input.readMessage(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.parser(), extensionRegistry);
+              dataPackage_ = input.readMessage(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(body_);
-                body_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(dataPackage_);
+                dataPackage_ = subBuilder.buildPartial();
               }
 
               break;
@@ -3382,25 +3426,25 @@ public final class ProtoMsg {
       return getResponse();
     }
 
-    public static final int BODY_FIELD_NUMBER = 7;
-    private cn.hashq.netpoststation.dto.ProtoMsg.DataPackage body_;
+    public static final int DATA_PACKAGE_FIELD_NUMBER = 7;
+    private cn.hashq.netpoststation.dto.ProtoMsg.DataPackage dataPackage_;
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    public boolean hasBody() {
-      return body_ != null;
+    public boolean hasDataPackage() {
+      return dataPackage_ != null;
     }
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getBody() {
-      return body_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : body_;
+    public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getDataPackage() {
+      return dataPackage_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : dataPackage_;
     }
     /**
-     * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+     * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
      */
-    public cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getBodyOrBuilder() {
-      return getBody();
+    public cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getDataPackageOrBuilder() {
+      return getDataPackage();
     }
 
     public static final int HEART_FIELD_NUMBER = 8;
@@ -3456,8 +3500,8 @@ public final class ProtoMsg {
       if (response_ != null) {
         output.writeMessage(6, getResponse());
       }
-      if (body_ != null) {
-        output.writeMessage(7, getBody());
+      if (dataPackage_ != null) {
+        output.writeMessage(7, getDataPackage());
       }
       if (heart_ != null) {
         output.writeMessage(8, getHeart());
@@ -3494,9 +3538,9 @@ public final class ProtoMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getResponse());
       }
-      if (body_ != null) {
+      if (dataPackage_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getBody());
+          .computeMessageSize(7, getDataPackage());
       }
       if (heart_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -3538,10 +3582,10 @@ public final class ProtoMsg {
         result = result && getResponse()
             .equals(other.getResponse());
       }
-      result = result && (hasBody() == other.hasBody());
-      if (hasBody()) {
-        result = result && getBody()
-            .equals(other.getBody());
+      result = result && (hasDataPackage() == other.hasDataPackage());
+      if (hasDataPackage()) {
+        result = result && getDataPackage()
+            .equals(other.getDataPackage());
       }
       result = result && (hasHeart() == other.hasHeart());
       if (hasHeart()) {
@@ -3578,9 +3622,9 @@ public final class ProtoMsg {
         hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
         hash = (53 * hash) + getResponse().hashCode();
       }
-      if (hasBody()) {
-        hash = (37 * hash) + BODY_FIELD_NUMBER;
-        hash = (53 * hash) + getBody().hashCode();
+      if (hasDataPackage()) {
+        hash = (37 * hash) + DATA_PACKAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getDataPackage().hashCode();
       }
       if (hasHeart()) {
         hash = (37 * hash) + HEART_FIELD_NUMBER;
@@ -3743,11 +3787,11 @@ public final class ProtoMsg {
           response_ = null;
           responseBuilder_ = null;
         }
-        if (bodyBuilder_ == null) {
-          body_ = null;
+        if (dataPackageBuilder_ == null) {
+          dataPackage_ = null;
         } else {
-          body_ = null;
-          bodyBuilder_ = null;
+          dataPackage_ = null;
+          dataPackageBuilder_ = null;
         }
         if (heartBuilder_ == null) {
           heart_ = null;
@@ -3799,10 +3843,10 @@ public final class ProtoMsg {
         } else {
           result.response_ = responseBuilder_.build();
         }
-        if (bodyBuilder_ == null) {
-          result.body_ = body_;
+        if (dataPackageBuilder_ == null) {
+          result.dataPackage_ = dataPackage_;
         } else {
-          result.body_ = bodyBuilder_.build();
+          result.dataPackage_ = dataPackageBuilder_.build();
         }
         if (heartBuilder_ == null) {
           result.heart_ = heart_;
@@ -3876,8 +3920,8 @@ public final class ProtoMsg {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
-        if (other.hasBody()) {
-          mergeBody(other.getBody());
+        if (other.hasDataPackage()) {
+          mergeDataPackage(other.getDataPackage());
         }
         if (other.hasHeart()) {
           mergeHeart(other.getHeart());
@@ -4402,121 +4446,121 @@ public final class ProtoMsg {
         return responseBuilder_;
       }
 
-      private cn.hashq.netpoststation.dto.ProtoMsg.DataPackage body_ = null;
+      private cn.hashq.netpoststation.dto.ProtoMsg.DataPackage dataPackage_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          cn.hashq.netpoststation.dto.ProtoMsg.DataPackage, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder, cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder> bodyBuilder_;
+          cn.hashq.netpoststation.dto.ProtoMsg.DataPackage, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder, cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder> dataPackageBuilder_;
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public boolean hasBody() {
-        return bodyBuilder_ != null || body_ != null;
+      public boolean hasDataPackage() {
+        return dataPackageBuilder_ != null || dataPackage_ != null;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getBody() {
-        if (bodyBuilder_ == null) {
-          return body_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : body_;
+      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage getDataPackage() {
+        if (dataPackageBuilder_ == null) {
+          return dataPackage_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : dataPackage_;
         } else {
-          return bodyBuilder_.getMessage();
+          return dataPackageBuilder_.getMessage();
         }
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public Builder setBody(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage value) {
-        if (bodyBuilder_ == null) {
+      public Builder setDataPackage(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage value) {
+        if (dataPackageBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          body_ = value;
+          dataPackage_ = value;
           onChanged();
         } else {
-          bodyBuilder_.setMessage(value);
+          dataPackageBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public Builder setBody(
+      public Builder setDataPackage(
           cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder builderForValue) {
-        if (bodyBuilder_ == null) {
-          body_ = builderForValue.build();
+        if (dataPackageBuilder_ == null) {
+          dataPackage_ = builderForValue.build();
           onChanged();
         } else {
-          bodyBuilder_.setMessage(builderForValue.build());
+          dataPackageBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public Builder mergeBody(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage value) {
-        if (bodyBuilder_ == null) {
-          if (body_ != null) {
-            body_ =
-              cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.newBuilder(body_).mergeFrom(value).buildPartial();
+      public Builder mergeDataPackage(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage value) {
+        if (dataPackageBuilder_ == null) {
+          if (dataPackage_ != null) {
+            dataPackage_ =
+              cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.newBuilder(dataPackage_).mergeFrom(value).buildPartial();
           } else {
-            body_ = value;
+            dataPackage_ = value;
           }
           onChanged();
         } else {
-          bodyBuilder_.mergeFrom(value);
+          dataPackageBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public Builder clearBody() {
-        if (bodyBuilder_ == null) {
-          body_ = null;
+      public Builder clearDataPackage() {
+        if (dataPackageBuilder_ == null) {
+          dataPackage_ = null;
           onChanged();
         } else {
-          body_ = null;
-          bodyBuilder_ = null;
+          dataPackage_ = null;
+          dataPackageBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder getBodyBuilder() {
+      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder getDataPackageBuilder() {
         
         onChanged();
-        return getBodyFieldBuilder().getBuilder();
+        return getDataPackageFieldBuilder().getBuilder();
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getBodyOrBuilder() {
-        if (bodyBuilder_ != null) {
-          return bodyBuilder_.getMessageOrBuilder();
+      public cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder getDataPackageOrBuilder() {
+        if (dataPackageBuilder_ != null) {
+          return dataPackageBuilder_.getMessageOrBuilder();
         } else {
-          return body_ == null ?
-              cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : body_;
+          return dataPackage_ == null ?
+              cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance() : dataPackage_;
         }
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.DataPackage body = 7;</code>
+       * <code>.cn.hashq.netpoststation.dto.DataPackage data_package = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.hashq.netpoststation.dto.ProtoMsg.DataPackage, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder, cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder> 
-          getBodyFieldBuilder() {
-        if (bodyBuilder_ == null) {
-          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getDataPackageFieldBuilder() {
+        if (dataPackageBuilder_ == null) {
+          dataPackageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               cn.hashq.netpoststation.dto.ProtoMsg.DataPackage, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder, cn.hashq.netpoststation.dto.ProtoMsg.DataPackageOrBuilder>(
-                  getBody(),
+                  getDataPackage(),
                   getParentForChildren(),
                   isClean());
-          body_ = null;
+          dataPackage_ = null;
         }
-        return bodyBuilder_;
+        return dataPackageBuilder_;
       }
 
       private cn.hashq.netpoststation.dto.ProtoMsg.HeartBody heart_ = null;
@@ -4731,21 +4775,23 @@ public final class ProtoMsg {
       ".dto\"\026\n\006Config\022\014\n\004port\030\001 \001(\r\"\026\n\004Auth\022\016\n\006" +
       "secret\030\001 \001(\t\"\031\n\tHeartBody\022\014\n\004body\030\001 \001(\t\"" +
       ":\n\014AuthResponse\022\016\n\006result\030\001 \001(\010\022\014\n\004code\030" +
-      "\002 \001(\r\022\014\n\004info\030\003 \001(\t\"8\n\013DataPackage\022\014\n\004ty" +
-      "pe\030\001 \001(\r\022\014\n\004port\030\002 \001(\r\022\r\n\005bytes\030\003 \001(\014\"\366\002" +
-      "\n\007Message\0223\n\004type\030\001 \001(\0162%.cn.hashq.netpo" +
-      "ststation.dto.HeadType\022\020\n\010sequence\030\002 \001(\004" +
-      "\022\022\n\nsession_id\030\003 \001(\t\0223\n\006config\030\004 \001(\0132#.c" +
-      "n.hashq.netpoststation.dto.Config\022/\n\004aut" +
-      "h\030\005 \001(\0132!.cn.hashq.netpoststation.dto.Au" +
-      "th\022;\n\010response\030\006 \001(\0132).cn.hashq.netposts" +
-      "tation.dto.AuthResponse\0226\n\004body\030\007 \001(\0132(." +
-      "cn.hashq.netpoststation.dto.DataPackage\022" +
-      "5\n\005heart\030\010 \001(\0132&.cn.hashq.netpoststation" +
-      ".dto.HeartBody*p\n\010HeadType\022\010\n\004AUTH\020\000\022\030\n\024" +
-      "CLIENT_DATA_REDIRECT\020\001\022\016\n\nHEART_BEAT\020\002\022\n" +
-      "\n\006CONFIG\020\003\022\021\n\rSERVICE_PAUSE\020\004\022\021\n\rAUTH_RE" +
-      "SPONSE\020\005B\nB\010ProtoMsgb\006proto3"
+      "\002 \001(\r\022\014\n\004info\030\003 \001(\t\"*\n\013DataPackage\022\014\n\004po" +
+      "rt\030\002 \001(\r\022\r\n\005bytes\030\003 \001(\014\"\376\002\n\007Message\0223\n\004t" +
+      "ype\030\001 \001(\0162%.cn.hashq.netpoststation.dto." +
+      "HeadType\022\020\n\010sequence\030\002 \001(\004\022\022\n\nsession_id" +
+      "\030\003 \001(\t\0223\n\006config\030\004 \001(\0132#.cn.hashq.netpos" +
+      "tstation.dto.Config\022/\n\004auth\030\005 \001(\0132!.cn.h" +
+      "ashq.netpoststation.dto.Auth\022;\n\010response" +
+      "\030\006 \001(\0132).cn.hashq.netpoststation.dto.Aut" +
+      "hResponse\022>\n\014data_package\030\007 \001(\0132(.cn.has" +
+      "hq.netpoststation.dto.DataPackage\0225\n\005hea" +
+      "rt\030\010 \001(\0132&.cn.hashq.netpoststation.dto.H" +
+      "eartBody*\212\001\n\010HeadType\022\010\n\004AUTH\020\000\022\030\n\024CLIEN" +
+      "T_DATA_REDIRECT\020\001\022\030\n\024SERVER_DATA_REDIREC" +
+      "T\020\002\022\016\n\nHEART_BEAT\020\003\022\n\n\006CONFIG\020\004\022\021\n\rSERVI" +
+      "CE_PAUSE\020\005\022\021\n\rAUTH_RESPONSE\020\006*3\n\017DataPac" +
+      "kageType\022\017\n\013FROM_SERVER\020\000\022\017\n\013FROM_CLIENT" +
+      "\020\001B\nB\010ProtoMsgb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4788,13 +4834,13 @@ public final class ProtoMsg {
     internal_static_cn_hashq_netpoststation_dto_DataPackage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_DataPackage_descriptor,
-        new java.lang.String[] { "Type", "Port", "Bytes", });
+        new java.lang.String[] { "Port", "Bytes", });
     internal_static_cn_hashq_netpoststation_dto_Message_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_cn_hashq_netpoststation_dto_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_Message_descriptor,
-        new java.lang.String[] { "Type", "Sequence", "SessionId", "Config", "Auth", "Response", "Body", "Heart", });
+        new java.lang.String[] { "Type", "Sequence", "SessionId", "Config", "Auth", "Response", "DataPackage", "Heart", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
