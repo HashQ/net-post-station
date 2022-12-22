@@ -59,6 +59,7 @@ public class ServerSession {
     public ServerSession reverseBind() {
         // 反向绑定
         channel.attr(ServerSession.SESSION_KEY).set(this);
+        SessionMap.inst().addSession(this);
         isAuth = true;
         return this;
     }
