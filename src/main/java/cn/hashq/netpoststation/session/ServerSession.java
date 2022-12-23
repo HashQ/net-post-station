@@ -38,6 +38,11 @@ public class ServerSession {
      */
     private String clientId;
 
+    /**
+     * 服务端端口
+     */
+    private int serverPort;
+
 
     /**
      * 唯一标识
@@ -72,7 +77,7 @@ public class ServerSession {
         ServerSession session = ctx.channel().attr(ServerSession.SESSION_KEY).get();
         if (Objects.nonNull(session) && session.isAuth()) {
             session.close();
-            SessionMap.inst().removeSession(session.getClientId());
+            SessionMap.inst().removeSession(session.getSessionId());
         }
     }
 

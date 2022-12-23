@@ -60,6 +60,7 @@ public class AuthHandler extends BaseHandler {
                     serverSession.get().close();
                     SessionMap.inst().removeSession(serverSession.get().getSessionId());
                 }
+                session.setClientId(client.getClientId());
                 session.reverseBind();
                 session.writeAndFlush(buildAuthResponse(seq, session, ProtoConstant.ResultCode.SUCCESS));
                 return true;
