@@ -14,15 +14,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NettyUtil {
+    private EventLoopGroup wg = new NioEventLoopGroup();
 
     public ChannelFuture openServerPort(int port, ChannelInitializer<SocketChannel> channels, GenericFutureListener listener) {
         EventLoopGroup bg = new NioEventLoopGroup(1);
-        EventLoopGroup wg = new NioEventLoopGroup();
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bg, wg);
         bootstrap.channel(NioServerSocketChannel.class);
         bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+//        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.localAddress(port);
         bootstrap.childHandler(channels);
         ChannelFuture future = bootstrap.bind();
