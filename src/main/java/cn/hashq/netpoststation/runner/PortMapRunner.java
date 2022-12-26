@@ -9,7 +9,6 @@ import cn.hashq.netpoststation.fao.PortMapFAO;
 import cn.hashq.netpoststation.handler.map.PortMapDataHandler;
 import cn.hashq.netpoststation.util.NettyUtil;
 import cn.hutool.core.util.StrUtil;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.util.concurrent.Future;
