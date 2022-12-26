@@ -1,4 +1,4 @@
-package cn.hashq.netpoststation.handler;
+package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.cache.ClientCache;
 import cn.hashq.netpoststation.concurrent.CallbackTask;
@@ -6,6 +6,7 @@ import cn.hashq.netpoststation.concurrent.CallbackTaskSchedule;
 import cn.hashq.netpoststation.constant.ProtoConstant;
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.entity.Client;
+import cn.hashq.netpoststation.handler.BaseHandler;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
 import io.netty.channel.ChannelHandler;

@@ -1,6 +1,6 @@
 package cn.hashq.netpoststation.runner;
 
-import cn.hashq.netpoststation.handler.AuthHandler;
+import cn.hashq.netpoststation.handler.proxy.AuthHandler;
 import cn.hashq.netpoststation.handler.ExceptionHandler;
 import cn.hashq.netpoststation.handler.ProtobufDecoder;
 import cn.hashq.netpoststation.handler.ProtobufEncoder;

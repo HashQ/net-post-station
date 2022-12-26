@@ -1,4 +1,4 @@
-package cn.hashq.netpoststation.handler;
+package cn.hashq.netpoststation.handler.map;
 
 import cn.hashq.netpoststation.cache.ClientCache;
 import cn.hashq.netpoststation.cache.PortMapCache;

@@ -19,7 +19,7 @@ public class PortMapCache {
         return instance;
     }
 
-    public void addClient(PortMap portMap) {
+    public void addPortMap(PortMap portMap) {
         if (!map.containsKey(portMap.getServerPort())) {
             map.put(portMap.getServerPort(), portMap);
         }

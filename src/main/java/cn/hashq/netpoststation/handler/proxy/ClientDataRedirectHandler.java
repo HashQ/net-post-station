@@ -1,6 +1,7 @@
-package cn.hashq.netpoststation.handler;
+package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.dto.ProtoMsg;
+import cn.hashq.netpoststation.handler.BaseHandler;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
 import io.netty.channel.ChannelHandler;

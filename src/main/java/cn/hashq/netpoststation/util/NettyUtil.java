@@ -27,11 +27,9 @@ public class NettyUtil {
             bootstrap.group(bg, wg);
             bootstrap.channel(NioServerSocketChannel.class);
             bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-//        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
             bootstrap.localAddress(port);
             bootstrap.childHandler(channels);
-            ChannelFuture future = null;
-            future = bootstrap.bind().sync();
+            ChannelFuture future  = bootstrap.bind().sync();
             future.addListener(listener);
             return future;
         } catch (InterruptedException e) {

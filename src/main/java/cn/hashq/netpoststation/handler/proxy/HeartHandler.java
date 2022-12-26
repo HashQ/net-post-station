@@ -1,4 +1,4 @@
-package cn.hashq.netpoststation.handler;
+package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.session.ServerSession;
