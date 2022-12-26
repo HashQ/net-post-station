@@ -41,7 +41,7 @@ public class ServerResponse<T> {
     }
 
     public static <T> ServerResponse createSuccessResult(T data) {
-        return createSuccessResult(data, null);
+        return createSuccessResult(data, "");
     }
 
     public static <T> ServerResponse createSuccessResult(T data, String msg) {
@@ -49,7 +49,7 @@ public class ServerResponse<T> {
     }
 
     public static ServerResponse createFailedResult() {
-        return createFailedResult(null);
+        return createFailedResult("");
     }
 
     public static ServerResponse createFailedResult(String msg) {

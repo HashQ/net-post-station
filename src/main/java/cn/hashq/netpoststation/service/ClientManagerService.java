@@ -1,6 +1,7 @@
 package cn.hashq.netpoststation.service;
 
 import cn.hashq.netpoststation.dto.AddClientDTO;
+import cn.hashq.netpoststation.entity.Client;
 import cn.hashq.netpoststation.vo.ServerResponse;
 
 /**
@@ -12,4 +13,6 @@ import cn.hashq.netpoststation.vo.ServerResponse;
 public interface ClientManagerService {
 
     ServerResponse addClient(AddClientDTO clientDTO);
+
+    ServerResponse listClient();
 }
