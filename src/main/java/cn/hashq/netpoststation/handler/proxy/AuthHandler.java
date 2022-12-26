@@ -1,4 +1,4 @@
-package cn.hashq.netpoststation.handler;
+package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.cache.ClientCache;
 import cn.hashq.netpoststation.concurrent.CallbackTask;
@@ -6,11 +6,11 @@ import cn.hashq.netpoststation.concurrent.CallbackTaskSchedule;
 import cn.hashq.netpoststation.constant.ProtoConstant;
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.entity.Client;
+import cn.hashq.netpoststation.handler.BaseHandler;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,10 @@ import java.util.Optional;
 public class AuthHandler extends BaseHandler {
 
     @Resource
-    private ClientDataRedirectHandler dataRedirectHandler;
+    private ClientDataRedirectHandler clientDataRedirectHandler;
+
+    @Resource
+    private ServerDataRedirectHandler serverDataRedirectHandler;
 
 
     @Override
@@ -58,6 +61,7 @@ public class AuthHandler extends BaseHandler {
                     serverSession.get().close();
                     SessionMap.inst().removeSession(serverSession.get().getSessionId());
                 }
+                session.setClientId(client.getClientId());
                 session.reverseBind();
                 session.writeAndFlush(buildAuthResponse(seq, session, ProtoConstant.ResultCode.SUCCESS));
                 return true;
@@ -66,7 +70,8 @@ public class AuthHandler extends BaseHandler {
             @Override
             public void onBack(Boolean r) {
                 if (r) {
-                    ctx.pipeline().addAfter("auth", "redirect", dataRedirectHandler);
+                    ctx.pipeline().addAfter("auth", "clientDataRedirect", clientDataRedirectHandler);
+                    ctx.pipeline().addAfter("auth", "serverDataRedirect", serverDataRedirectHandler);
                     ctx.pipeline().addAfter("auth", "heartBeat", new HeartHandler());
                     ctx.pipeline().remove("auth");
                 } else {

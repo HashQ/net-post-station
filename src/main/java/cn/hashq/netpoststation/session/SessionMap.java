@@ -23,7 +23,7 @@ public final class SessionMap {
     }
 
     public void addSession(ServerSession session) {
-        map.put(session.getClientId(), session);
+        map.put(session.getSessionId(), session);
     }
 
     public ServerSession getSession(String sessionId) {

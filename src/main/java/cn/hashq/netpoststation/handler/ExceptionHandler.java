@@ -1,6 +1,7 @@
 package cn.hashq.netpoststation.handler;
 
 import cn.hashq.netpoststation.exception.InvalidFrameException;
+import cn.hashq.netpoststation.session.ServerSession;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -27,7 +28,7 @@ public class ExceptionHandler extends ChannelInboundHandlerAdapter {
         }
         if (cause instanceof IOException) {
             log.info("客户端关闭链接");
-            // TODO:关闭链接，清除缓存
+            ServerSession.closeSession(ctx);
         } else {
             log.error("未知异常,异常信息:{}", cause.getMessage());
             cause.printStackTrace();
