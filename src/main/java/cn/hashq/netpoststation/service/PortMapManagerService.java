@@ -11,6 +11,9 @@ import cn.hashq.netpoststation.vo.ServerResponse;
  */
 public interface PortMapManagerService {
 
+    /**
+     * 添加端口映射
+     */
     ServerResponse addPortMap(AddPortMapDTO portMapDTO);
 
 }

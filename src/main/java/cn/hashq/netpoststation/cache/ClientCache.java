@@ -3,7 +3,6 @@ package cn.hashq.netpoststation.cache;
 import cn.hashq.netpoststation.entity.Client;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.0
  */
 @Data
-@Slf4j
 public class ClientCache {
 
     private ConcurrentHashMap<String, Client> map = new ConcurrentHashMap<>();

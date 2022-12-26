@@ -5,11 +5,17 @@ option java_outer_classname = 'ProtoMsg';
 /*消息类型*/
 enum HeadType{
   AUTH = 0;
-  DATA_REDIRECT = 1;
-  HEART_BEAT = 2;
-  CONFIG = 3;
-  SERVICE_PAUSE = 4;
-  AUTH_RESPONSE = 5;
+  CLIENT_DATA_REDIRECT = 1;
+  SERVER_DATA_REDIRECT = 2;
+  HEART_BEAT = 3;
+  CONFIG = 4;
+  SERVICE_PAUSE = 5;
+  AUTH_RESPONSE = 6;
+}
+
+enum DataPackageType{
+  FROM_SERVER = 0;
+  FROM_CLIENT = 1;
 }
 
 message Config{
@@ -31,7 +37,6 @@ message AuthResponse{
 }
 
 message DataPackage{
-  uint32 type = 1;
   uint32 port = 2;
   bytes bytes = 3;
 }
@@ -43,6 +48,6 @@ message Message{
   Config config = 4;
   Auth auth = 5;
   AuthResponse response = 6;
-  DataPackage body = 7;
+  DataPackage data_package = 7;
   HeartBody heart = 8;
 }
