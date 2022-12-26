@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * 公共配置类
  */
 @Data
-@Configuration
+//@Configuration
 public class CommonConfig {
 
     /**
