@@ -6,8 +6,6 @@ import cn.hashq.netpoststation.handler.ProtobufDecoder;
 import cn.hashq.netpoststation.handler.ProtobufEncoder;
 import cn.hashq.netpoststation.util.NettyUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.google.common.collect.Maps;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
@@ -15,15 +13,11 @@ import io.netty.channel.socket.SocketChannel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * 代理服务器
@@ -57,7 +51,7 @@ public class ProxyServerRunner implements ApplicationRunner {
         if (CollUtil.isNotEmpty(proxyPorts)) {
             proxyPort = Integer.valueOf(proxyPorts.get(0));
         }
-        startServer(null);
+        startServer(proxyPort);
     }
 
     private void startServer(Integer proxyProt) {
@@ -67,20 +61,6 @@ public class ProxyServerRunner implements ApplicationRunner {
         }
         run(defaultPort);
     }
-
-    private Map<String, String> parseArgs(String[] args) {
-        Map<String, String> params = Maps.newHashMap();
-        String commandStr = Arrays.stream(args).collect(Collectors.joining(" "));
-        String[] realParams = commandStr.split("-");
-        for (String realParam : realParams) {
-            if (StrUtil.isNotBlank(realParam)) {
-                String[] s = realParam.split(" ");
-                params.put(s[0], s[1]);
-            }
-        }
-        return params;
-    }
-
 
     private void run(int port) {
         ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
