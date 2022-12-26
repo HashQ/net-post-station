@@ -4,6 +4,7 @@ import cn.hashq.netpoststation.entity.PortMap;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 
 import java.io.File;
 import java.util.Iterator;
@@ -20,6 +21,10 @@ public class PortMapFAO {
     public static final String PORT_MAP_PATH = FileUtil.getUserHomePath() + File.separator + ".net-post-station" + File.separator + "PortMap.json";
 
     public synchronized static List<PortMap> listPortMap() {
+        if (!FileUtil.exist(PORT_MAP_PATH)) {
+            FileUtil.touch(PORT_MAP_PATH);
+            return Lists.newArrayList();
+        }
         String clientJsonStr = FileUtil.readString(PORT_MAP_PATH, "utf-8");
         List<PortMap> clients = JSON.parseArray(clientJsonStr, PortMap.class);
         return clients;

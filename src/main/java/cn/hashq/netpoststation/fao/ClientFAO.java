@@ -4,6 +4,7 @@ import cn.hashq.netpoststation.entity.Client;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 
 import java.io.File;
 import java.util.Iterator;
@@ -20,6 +21,10 @@ public class ClientFAO {
     public static final String CLIENT_PATH = FileUtil.getUserHomePath() + File.separator + ".net-post-station" + File.separator + "client.json";
 
     public synchronized static List<Client> listClient() {
+        if (!FileUtil.exist(CLIENT_PATH)) {
+            FileUtil.touch(CLIENT_PATH);
+            return Lists.newArrayList();
+        }
         String clientJsonStr = FileUtil.readString(CLIENT_PATH, "utf-8");
         List<Client> clients = JSON.parseArray(clientJsonStr, Client.class);
         return clients;
