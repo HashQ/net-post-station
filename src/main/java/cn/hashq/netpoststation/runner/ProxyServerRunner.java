@@ -54,10 +54,10 @@ public class ProxyServerRunner implements ApplicationRunner {
         startServer(proxyPort);
     }
 
-    private void startServer(Integer proxyProt) {
+    private void startServer(Integer proxyPort) {
         int defaultPort = 8090;
-        if (Objects.nonNull(proxyProt)) {
-            defaultPort = proxyProt;
+        if (Objects.nonNull(proxyPort)) {
+            defaultPort = proxyPort;
         }
         run(defaultPort);
     }
