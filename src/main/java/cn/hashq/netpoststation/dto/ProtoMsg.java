@@ -264,9 +264,14 @@ public final class ProtoMsg {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 port = 1;</code>
+     * <code>uint32 serverPort = 1;</code>
      */
-    int getPort();
+    int getServerPort();
+
+    /**
+     * <code>uint32 clientPort = 2;</code>
+     */
+    int getClientPort();
   }
   /**
    * Protobuf type {@code cn.hashq.netpoststation.dto.Config}
@@ -281,7 +286,8 @@ public final class ProtoMsg {
       super(builder);
     }
     private Config() {
-      port_ = 0;
+      serverPort_ = 0;
+      clientPort_ = 0;
     }
 
     @java.lang.Override
@@ -310,7 +316,12 @@ public final class ProtoMsg {
               break;
             case 8: {
 
-              port_ = input.readUInt32();
+              serverPort_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+
+              clientPort_ = input.readUInt32();
               break;
             }
             default: {
@@ -345,13 +356,22 @@ public final class ProtoMsg {
               cn.hashq.netpoststation.dto.ProtoMsg.Config.class, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder.class);
     }
 
-    public static final int PORT_FIELD_NUMBER = 1;
-    private int port_;
+    public static final int SERVERPORT_FIELD_NUMBER = 1;
+    private int serverPort_;
     /**
-     * <code>uint32 port = 1;</code>
+     * <code>uint32 serverPort = 1;</code>
      */
-    public int getPort() {
-      return port_;
+    public int getServerPort() {
+      return serverPort_;
+    }
+
+    public static final int CLIENTPORT_FIELD_NUMBER = 2;
+    private int clientPort_;
+    /**
+     * <code>uint32 clientPort = 2;</code>
+     */
+    public int getClientPort() {
+      return clientPort_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -368,8 +388,11 @@ public final class ProtoMsg {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (port_ != 0) {
-        output.writeUInt32(1, port_);
+      if (serverPort_ != 0) {
+        output.writeUInt32(1, serverPort_);
+      }
+      if (clientPort_ != 0) {
+        output.writeUInt32(2, clientPort_);
       }
       unknownFields.writeTo(output);
     }
@@ -380,9 +403,13 @@ public final class ProtoMsg {
       if (size != -1) return size;
 
       size = 0;
-      if (port_ != 0) {
+      if (serverPort_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, port_);
+          .computeUInt32Size(1, serverPort_);
+      }
+      if (clientPort_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, clientPort_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -400,8 +427,10 @@ public final class ProtoMsg {
       cn.hashq.netpoststation.dto.ProtoMsg.Config other = (cn.hashq.netpoststation.dto.ProtoMsg.Config) obj;
 
       boolean result = true;
-      result = result && (getPort()
-          == other.getPort());
+      result = result && (getServerPort()
+          == other.getServerPort());
+      result = result && (getClientPort()
+          == other.getClientPort());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -413,8 +442,10 @@ public final class ProtoMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PORT_FIELD_NUMBER;
-      hash = (53 * hash) + getPort();
+      hash = (37 * hash) + SERVERPORT_FIELD_NUMBER;
+      hash = (53 * hash) + getServerPort();
+      hash = (37 * hash) + CLIENTPORT_FIELD_NUMBER;
+      hash = (53 * hash) + getClientPort();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -548,7 +579,9 @@ public final class ProtoMsg {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        port_ = 0;
+        serverPort_ = 0;
+
+        clientPort_ = 0;
 
         return this;
       }
@@ -576,7 +609,8 @@ public final class ProtoMsg {
       @java.lang.Override
       public cn.hashq.netpoststation.dto.ProtoMsg.Config buildPartial() {
         cn.hashq.netpoststation.dto.ProtoMsg.Config result = new cn.hashq.netpoststation.dto.ProtoMsg.Config(this);
-        result.port_ = port_;
+        result.serverPort_ = serverPort_;
+        result.clientPort_ = clientPort_;
         onBuilt();
         return result;
       }
@@ -625,8 +659,11 @@ public final class ProtoMsg {
 
       public Builder mergeFrom(cn.hashq.netpoststation.dto.ProtoMsg.Config other) {
         if (other == cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance()) return this;
-        if (other.getPort() != 0) {
-          setPort(other.getPort());
+        if (other.getServerPort() != 0) {
+          setServerPort(other.getServerPort());
+        }
+        if (other.getClientPort() != 0) {
+          setClientPort(other.getClientPort());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -657,28 +694,54 @@ public final class ProtoMsg {
         return this;
       }
 
-      private int port_ ;
+      private int serverPort_ ;
       /**
-       * <code>uint32 port = 1;</code>
+       * <code>uint32 serverPort = 1;</code>
        */
-      public int getPort() {
-        return port_;
+      public int getServerPort() {
+        return serverPort_;
       }
       /**
-       * <code>uint32 port = 1;</code>
+       * <code>uint32 serverPort = 1;</code>
        */
-      public Builder setPort(int value) {
+      public Builder setServerPort(int value) {
         
-        port_ = value;
+        serverPort_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 port = 1;</code>
+       * <code>uint32 serverPort = 1;</code>
        */
-      public Builder clearPort() {
+      public Builder clearServerPort() {
         
-        port_ = 0;
+        serverPort_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int clientPort_ ;
+      /**
+       * <code>uint32 clientPort = 2;</code>
+       */
+      public int getClientPort() {
+        return clientPort_;
+      }
+      /**
+       * <code>uint32 clientPort = 2;</code>
+       */
+      public Builder setClientPort(int value) {
+        
+        clientPort_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 clientPort = 2;</code>
+       */
+      public Builder clearClientPort() {
+        
+        clientPort_ = 0;
         onChanged();
         return this;
       }
@@ -3083,17 +3146,28 @@ public final class ProtoMsg {
         getSessionIdBytes();
 
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    boolean hasConfig();
+    java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config> 
+        getConfigList();
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig();
+    cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig(int index);
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder();
+    int getConfigCount();
+    /**
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+     */
+    java.util.List<? extends cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> 
+        getConfigOrBuilderList();
+    /**
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+     */
+    cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder(
+        int index);
 
     /**
      * <code>.cn.hashq.netpoststation.dto.Auth auth = 5;</code>
@@ -3163,6 +3237,7 @@ public final class ProtoMsg {
       type_ = 0;
       sequence_ = 0L;
       sessionId_ = "";
+      config_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -3207,16 +3282,12 @@ public final class ProtoMsg {
               break;
             }
             case 34: {
-              cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder subBuilder = null;
-              if (config_ != null) {
-                subBuilder = config_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                config_ = new java.util.ArrayList<cn.hashq.netpoststation.dto.ProtoMsg.Config>();
+                mutable_bitField0_ |= 0x00000008;
               }
-              config_ = input.readMessage(cn.hashq.netpoststation.dto.ProtoMsg.Config.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(config_);
-                config_ = subBuilder.buildPartial();
-              }
-
+              config_.add(
+                  input.readMessage(cn.hashq.netpoststation.dto.ProtoMsg.Config.parser(), extensionRegistry));
               break;
             }
             case 42: {
@@ -3286,6 +3357,9 @@ public final class ProtoMsg {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          config_ = java.util.Collections.unmodifiableList(config_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -3303,6 +3377,7 @@ public final class ProtoMsg {
               cn.hashq.netpoststation.dto.ProtoMsg.Message.class, cn.hashq.netpoststation.dto.ProtoMsg.Message.Builder.class);
     }
 
+    private int bitField0_;
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_;
     /**
@@ -3364,24 +3439,38 @@ public final class ProtoMsg {
     }
 
     public static final int CONFIG_FIELD_NUMBER = 4;
-    private cn.hashq.netpoststation.dto.ProtoMsg.Config config_;
+    private java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config> config_;
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    public boolean hasConfig() {
-      return config_ != null;
+    public java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config> getConfigList() {
+      return config_;
     }
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    public cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig() {
-      return config_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance() : config_;
+    public java.util.List<? extends cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> 
+        getConfigOrBuilderList() {
+      return config_;
     }
     /**
-     * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
      */
-    public cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder() {
-      return getConfig();
+    public int getConfigCount() {
+      return config_.size();
+    }
+    /**
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+     */
+    public cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig(int index) {
+      return config_.get(index);
+    }
+    /**
+     * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+     */
+    public cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder(
+        int index) {
+      return config_.get(index);
     }
 
     public static final int AUTH_FIELD_NUMBER = 5;
@@ -3491,8 +3580,8 @@ public final class ProtoMsg {
       if (!getSessionIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, sessionId_);
       }
-      if (config_ != null) {
-        output.writeMessage(4, getConfig());
+      for (int i = 0; i < config_.size(); i++) {
+        output.writeMessage(4, config_.get(i));
       }
       if (auth_ != null) {
         output.writeMessage(5, getAuth());
@@ -3526,9 +3615,9 @@ public final class ProtoMsg {
       if (!getSessionIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, sessionId_);
       }
-      if (config_ != null) {
+      for (int i = 0; i < config_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getConfig());
+          .computeMessageSize(4, config_.get(i));
       }
       if (auth_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -3567,11 +3656,8 @@ public final class ProtoMsg {
           == other.getSequence());
       result = result && getSessionId()
           .equals(other.getSessionId());
-      result = result && (hasConfig() == other.hasConfig());
-      if (hasConfig()) {
-        result = result && getConfig()
-            .equals(other.getConfig());
-      }
+      result = result && getConfigList()
+          .equals(other.getConfigList());
       result = result && (hasAuth() == other.hasAuth());
       if (hasAuth()) {
         result = result && getAuth()
@@ -3610,9 +3696,9 @@ public final class ProtoMsg {
           getSequence());
       hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
       hash = (53 * hash) + getSessionId().hashCode();
-      if (hasConfig()) {
+      if (getConfigCount() > 0) {
         hash = (37 * hash) + CONFIG_FIELD_NUMBER;
-        hash = (53 * hash) + getConfig().hashCode();
+        hash = (53 * hash) + getConfigList().hashCode();
       }
       if (hasAuth()) {
         hash = (37 * hash) + AUTH_FIELD_NUMBER;
@@ -3758,6 +3844,7 @@ public final class ProtoMsg {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getConfigFieldBuilder();
         }
       }
       @java.lang.Override
@@ -3770,10 +3857,10 @@ public final class ProtoMsg {
         sessionId_ = "";
 
         if (configBuilder_ == null) {
-          config_ = null;
+          config_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
-          config_ = null;
-          configBuilder_ = null;
+          configBuilder_.clear();
         }
         if (authBuilder_ == null) {
           auth_ = null;
@@ -3825,10 +3912,16 @@ public final class ProtoMsg {
       @java.lang.Override
       public cn.hashq.netpoststation.dto.ProtoMsg.Message buildPartial() {
         cn.hashq.netpoststation.dto.ProtoMsg.Message result = new cn.hashq.netpoststation.dto.ProtoMsg.Message(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         result.type_ = type_;
         result.sequence_ = sequence_;
         result.sessionId_ = sessionId_;
         if (configBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            config_ = java.util.Collections.unmodifiableList(config_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
           result.config_ = config_;
         } else {
           result.config_ = configBuilder_.build();
@@ -3853,6 +3946,7 @@ public final class ProtoMsg {
         } else {
           result.heart_ = heartBuilder_.build();
         }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3911,8 +4005,31 @@ public final class ProtoMsg {
           sessionId_ = other.sessionId_;
           onChanged();
         }
-        if (other.hasConfig()) {
-          mergeConfig(other.getConfig());
+        if (configBuilder_ == null) {
+          if (!other.config_.isEmpty()) {
+            if (config_.isEmpty()) {
+              config_ = other.config_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureConfigIsMutable();
+              config_.addAll(other.config_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.config_.isEmpty()) {
+            if (configBuilder_.isEmpty()) {
+              configBuilder_.dispose();
+              configBuilder_ = null;
+              config_ = other.config_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              configBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getConfigFieldBuilder() : null;
+            } else {
+              configBuilder_.addAllMessages(other.config_);
+            }
+          }
         }
         if (other.hasAuth()) {
           mergeAuth(other.getAuth());
@@ -3954,6 +4071,7 @@ public final class ProtoMsg {
         }
         return this;
       }
+      private int bitField0_;
 
       private int type_ = 0;
       /**
@@ -4095,116 +4213,239 @@ public final class ProtoMsg {
         return this;
       }
 
-      private cn.hashq.netpoststation.dto.ProtoMsg.Config config_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          cn.hashq.netpoststation.dto.ProtoMsg.Config, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder, cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> configBuilder_;
-      /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
-       */
-      public boolean hasConfig() {
-        return configBuilder_ != null || config_ != null;
+      private java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config> config_ =
+        java.util.Collections.emptyList();
+      private void ensureConfigIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          config_ = new java.util.ArrayList<cn.hashq.netpoststation.dto.ProtoMsg.Config>(config_);
+          bitField0_ |= 0x00000008;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          cn.hashq.netpoststation.dto.ProtoMsg.Config, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder, cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> configBuilder_;
+
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig() {
+      public java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config> getConfigList() {
         if (configBuilder_ == null) {
-          return config_ == null ? cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance() : config_;
+          return java.util.Collections.unmodifiableList(config_);
         } else {
-          return configBuilder_.getMessage();
+          return configBuilder_.getMessageList();
         }
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      public Builder setConfig(cn.hashq.netpoststation.dto.ProtoMsg.Config value) {
+      public int getConfigCount() {
+        if (configBuilder_ == null) {
+          return config_.size();
+        } else {
+          return configBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public cn.hashq.netpoststation.dto.ProtoMsg.Config getConfig(int index) {
+        if (configBuilder_ == null) {
+          return config_.get(index);
+        } else {
+          return configBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public Builder setConfig(
+          int index, cn.hashq.netpoststation.dto.ProtoMsg.Config value) {
         if (configBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          config_ = value;
+          ensureConfigIsMutable();
+          config_.set(index, value);
           onChanged();
         } else {
-          configBuilder_.setMessage(value);
+          configBuilder_.setMessage(index, value);
         }
-
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
       public Builder setConfig(
+          int index, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder builderForValue) {
+        if (configBuilder_ == null) {
+          ensureConfigIsMutable();
+          config_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          configBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public Builder addConfig(cn.hashq.netpoststation.dto.ProtoMsg.Config value) {
+        if (configBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureConfigIsMutable();
+          config_.add(value);
+          onChanged();
+        } else {
+          configBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public Builder addConfig(
+          int index, cn.hashq.netpoststation.dto.ProtoMsg.Config value) {
+        if (configBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureConfigIsMutable();
+          config_.add(index, value);
+          onChanged();
+        } else {
+          configBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public Builder addConfig(
           cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder builderForValue) {
         if (configBuilder_ == null) {
-          config_ = builderForValue.build();
+          ensureConfigIsMutable();
+          config_.add(builderForValue.build());
           onChanged();
         } else {
-          configBuilder_.setMessage(builderForValue.build());
+          configBuilder_.addMessage(builderForValue.build());
         }
-
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      public Builder mergeConfig(cn.hashq.netpoststation.dto.ProtoMsg.Config value) {
+      public Builder addConfig(
+          int index, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder builderForValue) {
         if (configBuilder_ == null) {
-          if (config_ != null) {
-            config_ =
-              cn.hashq.netpoststation.dto.ProtoMsg.Config.newBuilder(config_).mergeFrom(value).buildPartial();
-          } else {
-            config_ = value;
-          }
+          ensureConfigIsMutable();
+          config_.add(index, builderForValue.build());
           onChanged();
         } else {
-          configBuilder_.mergeFrom(value);
+          configBuilder_.addMessage(index, builderForValue.build());
         }
-
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public Builder addAllConfig(
+          java.lang.Iterable<? extends cn.hashq.netpoststation.dto.ProtoMsg.Config> values) {
+        if (configBuilder_ == null) {
+          ensureConfigIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, config_);
+          onChanged();
+        } else {
+          configBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
       public Builder clearConfig() {
         if (configBuilder_ == null) {
-          config_ = null;
+          config_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
-          config_ = null;
-          configBuilder_ = null;
+          configBuilder_.clear();
         }
-
         return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder getConfigBuilder() {
-        
-        onChanged();
-        return getConfigFieldBuilder().getBuilder();
+      public Builder removeConfig(int index) {
+        if (configBuilder_ == null) {
+          ensureConfigIsMutable();
+          config_.remove(index);
+          onChanged();
+        } else {
+          configBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      public cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder() {
-        if (configBuilder_ != null) {
-          return configBuilder_.getMessageOrBuilder();
-        } else {
-          return config_ == null ?
-              cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance() : config_;
+      public cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder getConfigBuilder(
+          int index) {
+        return getConfigFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder getConfigOrBuilder(
+          int index) {
+        if (configBuilder_ == null) {
+          return config_.get(index);  } else {
+          return configBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>.cn.hashq.netpoststation.dto.Config config = 4;</code>
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      public java.util.List<? extends cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> 
+           getConfigOrBuilderList() {
+        if (configBuilder_ != null) {
+          return configBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(config_);
+        }
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder addConfigBuilder() {
+        return getConfigFieldBuilder().addBuilder(
+            cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder addConfigBuilder(
+          int index) {
+        return getConfigFieldBuilder().addBuilder(
+            index, cn.hashq.netpoststation.dto.ProtoMsg.Config.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .cn.hashq.netpoststation.dto.Config config = 4;</code>
+       */
+      public java.util.List<cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder> 
+           getConfigBuilderList() {
+        return getConfigFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           cn.hashq.netpoststation.dto.ProtoMsg.Config, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder, cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder> 
           getConfigFieldBuilder() {
         if (configBuilder_ == null) {
-          configBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          configBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               cn.hashq.netpoststation.dto.ProtoMsg.Config, cn.hashq.netpoststation.dto.ProtoMsg.Config.Builder, cn.hashq.netpoststation.dto.ProtoMsg.ConfigOrBuilder>(
-                  getConfig(),
+                  config_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           config_ = null;
@@ -4772,26 +5013,27 @@ public final class ProtoMsg {
   static {
     java.lang.String[] descriptorData = {
       "\n\rMessage.proto\022\033cn.hashq.netpoststation" +
-      ".dto\"\026\n\006Config\022\014\n\004port\030\001 \001(\r\"\026\n\004Auth\022\016\n\006" +
-      "secret\030\001 \001(\t\"\031\n\tHeartBody\022\014\n\004body\030\001 \001(\t\"" +
-      ":\n\014AuthResponse\022\016\n\006result\030\001 \001(\010\022\014\n\004code\030" +
-      "\002 \001(\r\022\014\n\004info\030\003 \001(\t\"*\n\013DataPackage\022\014\n\004po" +
-      "rt\030\002 \001(\r\022\r\n\005bytes\030\003 \001(\014\"\376\002\n\007Message\0223\n\004t" +
-      "ype\030\001 \001(\0162%.cn.hashq.netpoststation.dto." +
-      "HeadType\022\020\n\010sequence\030\002 \001(\004\022\022\n\nsession_id" +
-      "\030\003 \001(\t\0223\n\006config\030\004 \001(\0132#.cn.hashq.netpos" +
-      "tstation.dto.Config\022/\n\004auth\030\005 \001(\0132!.cn.h" +
-      "ashq.netpoststation.dto.Auth\022;\n\010response" +
-      "\030\006 \001(\0132).cn.hashq.netpoststation.dto.Aut" +
-      "hResponse\022>\n\014data_package\030\007 \001(\0132(.cn.has" +
-      "hq.netpoststation.dto.DataPackage\0225\n\005hea" +
-      "rt\030\010 \001(\0132&.cn.hashq.netpoststation.dto.H" +
-      "eartBody*\212\001\n\010HeadType\022\010\n\004AUTH\020\000\022\030\n\024CLIEN" +
-      "T_DATA_REDIRECT\020\001\022\030\n\024SERVER_DATA_REDIREC" +
-      "T\020\002\022\016\n\nHEART_BEAT\020\003\022\n\n\006CONFIG\020\004\022\021\n\rSERVI" +
-      "CE_PAUSE\020\005\022\021\n\rAUTH_RESPONSE\020\006*3\n\017DataPac" +
-      "kageType\022\017\n\013FROM_SERVER\020\000\022\017\n\013FROM_CLIENT" +
-      "\020\001B\nB\010ProtoMsgb\006proto3"
+      ".dto\"0\n\006Config\022\022\n\nserverPort\030\001 \001(\r\022\022\n\ncl" +
+      "ientPort\030\002 \001(\r\"\026\n\004Auth\022\016\n\006secret\030\001 \001(\t\"\031" +
+      "\n\tHeartBody\022\014\n\004body\030\001 \001(\t\":\n\014AuthRespons" +
+      "e\022\016\n\006result\030\001 \001(\010\022\014\n\004code\030\002 \001(\r\022\014\n\004info\030" +
+      "\003 \001(\t\"*\n\013DataPackage\022\014\n\004port\030\002 \001(\r\022\r\n\005by" +
+      "tes\030\003 \001(\014\"\376\002\n\007Message\0223\n\004type\030\001 \001(\0162%.cn" +
+      ".hashq.netpoststation.dto.HeadType\022\020\n\010se" +
+      "quence\030\002 \001(\004\022\022\n\nsession_id\030\003 \001(\t\0223\n\006conf" +
+      "ig\030\004 \003(\0132#.cn.hashq.netpoststation.dto.C" +
+      "onfig\022/\n\004auth\030\005 \001(\0132!.cn.hashq.netpostst" +
+      "ation.dto.Auth\022;\n\010response\030\006 \001(\0132).cn.ha" +
+      "shq.netpoststation.dto.AuthResponse\022>\n\014d" +
+      "ata_package\030\007 \001(\0132(.cn.hashq.netpoststat" +
+      "ion.dto.DataPackage\0225\n\005heart\030\010 \001(\0132&.cn." +
+      "hashq.netpoststation.dto.HeartBody*\212\001\n\010H" +
+      "eadType\022\010\n\004AUTH\020\000\022\030\n\024CLIENT_DATA_REDIREC" +
+      "T\020\001\022\030\n\024SERVER_DATA_REDIRECT\020\002\022\016\n\nHEART_B" +
+      "EAT\020\003\022\n\n\006CONFIG\020\004\022\021\n\rSERVICE_PAUSE\020\005\022\021\n\r" +
+      "AUTH_RESPONSE\020\006*3\n\017DataPackageType\022\017\n\013FR" +
+      "OM_SERVER\020\000\022\017\n\013FROM_CLIENT\020\001B\nB\010ProtoMsg" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4810,7 +5052,7 @@ public final class ProtoMsg {
     internal_static_cn_hashq_netpoststation_dto_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_Config_descriptor,
-        new java.lang.String[] { "Port", });
+        new java.lang.String[] { "ServerPort", "ClientPort", });
     internal_static_cn_hashq_netpoststation_dto_Auth_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_cn_hashq_netpoststation_dto_Auth_fieldAccessorTable = new

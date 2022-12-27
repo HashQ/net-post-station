@@ -19,7 +19,8 @@ enum DataPackageType{
 }
 
 message Config{
-  uint32 port = 1;
+  uint32 serverPort = 1;
+  uint32 clientPort = 2;
 }
 
 message Auth{
@@ -45,7 +46,7 @@ message Message{
   HeadType type = 1;
   uint64 sequence = 2;
   string session_id = 3;
-  Config config = 4;
+  repeated Config config = 4;
   Auth auth = 5;
   AuthResponse response = 6;
   DataPackage data_package = 7;
