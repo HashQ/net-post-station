@@ -1,22 +1,27 @@
 package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.cache.ClientCache;
+import cn.hashq.netpoststation.cache.PortMapCache;
 import cn.hashq.netpoststation.concurrent.CallbackTask;
 import cn.hashq.netpoststation.concurrent.CallbackTaskSchedule;
 import cn.hashq.netpoststation.constant.ProtoConstant;
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.entity.Client;
+import cn.hashq.netpoststation.entity.PortMap;
 import cn.hashq.netpoststation.handler.BaseHandler;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
+import cn.hutool.core.util.StrUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 验证客户端用Handler
@@ -74,6 +79,8 @@ public class AuthHandler extends BaseHandler {
                     ctx.pipeline().addAfter("auth", "serverDataRedirect", serverDataRedirectHandler);
                     ctx.pipeline().addAfter("auth", "heartBeat", new HeartHandler());
                     ctx.pipeline().remove("auth");
+                    ProtoMsg.Message msg = buildConfigMsg(session);
+                    session.writeAndFlush(msg);
                 } else {
                     ServerSession.closeSession(ctx);
                 }
@@ -86,7 +93,24 @@ public class AuthHandler extends BaseHandler {
         });
     }
 
-    public ProtoMsg.Message buildAuthResponse(long seq, ServerSession session, ProtoConstant.ResultCode code) {
+    private ProtoMsg.Message buildConfigMsg(ServerSession session) {
+        List<PortMap> portMaps = PortMapCache.getInstance().getMap().values().stream()
+                .filter(e -> StrUtil.equals(session.getClientId(), e.getClientId()) && e.getStatus() == 1)
+                .collect(Collectors.toList());
+        ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder();
+        builder.setType(ProtoMsg.HeadType.CONFIG);
+
+        for (int i = 0; i < portMaps.size(); i++) {
+            PortMap portMap = portMaps.get(i);
+            ProtoMsg.Config config = ProtoMsg.Config.newBuilder()
+                    .setClientPort(portMap.getClientPort())
+                    .setServerPort(portMap.getServerPort()).build();
+            builder.addConfig(config);
+        }
+        return builder.build();
+    }
+
+    private ProtoMsg.Message buildAuthResponse(long seq, ServerSession session, ProtoConstant.ResultCode code) {
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder()
                 .setType(ProtoMsg.HeadType.AUTH_RESPONSE)
                 .setSequence(seq)

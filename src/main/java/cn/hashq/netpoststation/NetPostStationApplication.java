@@ -12,8 +12,4 @@ public class NetPostStationApplication {
         SpringApplication.run(NetPostStationApplication.class, args);
     }
 
-
-
-
-
 }
