@@ -99,12 +99,13 @@ public class AuthHandler extends BaseHandler {
                 .collect(Collectors.toList());
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder();
         builder.setType(ProtoMsg.HeadType.CONFIG);
+
         for (int i = 0; i < portMaps.size(); i++) {
             PortMap portMap = portMaps.get(i);
             ProtoMsg.Config config = ProtoMsg.Config.newBuilder()
                     .setClientPort(portMap.getClientPort())
                     .setServerPort(portMap.getServerPort()).build();
-            builder.setConfig(i, config);
+            builder.addConfig(config);
         }
         return builder.build();
     }

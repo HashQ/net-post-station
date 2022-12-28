@@ -23,7 +23,7 @@ public class ProtobufEncoder extends MessageToByteEncoder<ProtoMsg.Message> {
 
     private void encode0(ProtoMsg.Message msg, ByteBuf out) {
         out.writeShort(ProtoConstant.MAGIC_CODE);
-        out.writeShort(ProtoConstant.VERSION_CODE);
+//        out.writeShort(ProtoConstant.VERSION_CODE);
         byte[] bytes = msg.toByteArray();
         int length = bytes.length;
         log.info("encode length {}", length);
