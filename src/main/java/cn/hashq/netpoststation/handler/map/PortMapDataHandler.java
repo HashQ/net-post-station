@@ -32,11 +32,18 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        if (ctx.channel().isActive()){
+            ServerSession session = new ServerSession(ctx.channel());
+            session.setServerPort(port);
+            session.reverseBind();
+            SessionMap.inst().addSession(session);
+        }
+    }
+
+    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ServerSession session = new ServerSession(ctx.channel());
-        session.setServerPort(port);
-        session.reverseBind();
-        SessionMap.inst().addSession(session);
+
     }
 
     @Override

@@ -10,7 +10,7 @@ public class EmptyEncoder extends MessageToByteEncoder<byte[]> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, byte[] msg, ByteBuf out) throws Exception {
-        log.info("客户端响应{}", msg);
+        log.info("客户端响应{}", new String(msg,"utf-8"));
         out.writeBytes(msg);
     }
 

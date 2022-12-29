@@ -32,8 +32,7 @@ public class ClientDataRedirectHandler extends BaseHandler {
     public void process(ChannelHandlerContext ctx, ProtoMsg.Message msg) {
         ProtoMsg.DataPackage dataPackage = msg.getDataPackage();
         byte[] bytes = dataPackage.getBytes().toByteArray();
-        String sessionId = msg.getSessionId();
-        ServerSession session = SessionMap.inst().getSession(sessionId);
+        ServerSession session = SessionMap.inst().getSessionByServerPort(dataPackage.getPort()).get();
         session.writeAndFlush(bytes);
     }
 

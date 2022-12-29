@@ -35,6 +35,12 @@ public final class SessionMap {
         map.remove(sessionId);
     }
 
+    public Optional<ServerSession> getSessionByServerPort(int serverPort) {
+        return map.values().stream()
+                .filter(e -> e.getServerPort() == serverPort)
+                .findFirst();
+    }
+
     public Optional<ServerSession> getSessionByClientId(String clientId) {
         return map.values().stream()
                 .filter(e -> StrUtil.equals(clientId, e.getClientId()))
