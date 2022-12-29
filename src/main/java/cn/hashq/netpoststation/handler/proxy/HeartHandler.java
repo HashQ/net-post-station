@@ -37,7 +37,8 @@ public class HeartHandler extends IdleStateHandler {
         if (type.equals(ProtoMsg.HeadType.HEART_BEAT)) {
             ThreadUtil.getIOIntenseTargetThreadPool().submit(() -> {
                 if (ctx.channel().isActive()) {
-                    ctx.writeAndFlush(msg);
+                    log.info("{}", pkg.getHeart().getBody());
+                    ctx.writeAndFlush(pkg);
                 }
             });
         }

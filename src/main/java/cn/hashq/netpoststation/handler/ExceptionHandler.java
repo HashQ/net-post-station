@@ -40,8 +40,4 @@ public class ExceptionHandler extends ChannelInboundHandlerAdapter {
         ctx.flush();
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-    }
 }
