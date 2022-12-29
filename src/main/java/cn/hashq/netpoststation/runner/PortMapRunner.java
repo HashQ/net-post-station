@@ -6,6 +6,8 @@ import cn.hashq.netpoststation.entity.Client;
 import cn.hashq.netpoststation.entity.PortMap;
 import cn.hashq.netpoststation.fao.ClientFAO;
 import cn.hashq.netpoststation.fao.PortMapFAO;
+import cn.hashq.netpoststation.handler.map.EmptyDecoder;
+import cn.hashq.netpoststation.handler.map.EmptyEncoder;
 import cn.hashq.netpoststation.handler.map.PortMapDataHandler;
 import cn.hashq.netpoststation.util.NettyUtil;
 import cn.hutool.core.util.StrUtil;
@@ -58,7 +60,10 @@ public class PortMapRunner implements CommandLineRunner {
 
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(new PortMapDataHandler(portMap.getServerPort()));
+                ch.pipeline()
+                        .addLast(new EmptyEncoder())
+                        .addLast(new EmptyDecoder())
+                        .addLast(new PortMapDataHandler(portMap.getServerPort()));
             }
         };
         GenericFutureListener listener = new GenericFutureListener() {

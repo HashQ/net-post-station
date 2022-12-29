@@ -8,6 +8,7 @@ import cn.hashq.netpoststation.entity.PortMap;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
 import com.google.protobuf.ByteString;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
@@ -52,11 +53,18 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
             ServerSession.closeSession(ctx);
         }
         Optional<ServerSession> proxySession = SessionMap.inst().getSessionByClientId(clientId);
-        if (proxySession.isPresent()) {
+        if (!proxySession.isPresent()) {
             log.info("{}客户端未上线", client.getClientName());
             ServerSession.closeSession(ctx);
         }
-        byte[] bytes = (byte[]) msg;
+        ByteBuf buf = (ByteBuf) msg;
+        int length = buf.readableBytes();
+        if (length == 0) {
+            super.channelRead(ctx, msg);
+            return;
+        }
+        byte[] bytes = new byte[length];
+        buf.readBytes(bytes);
         ProtoMsg.DataPackage dataPackage = ProtoMsg.DataPackage.newBuilder()
                 .setPort(port)
                 .setBytes(ByteString.copyFrom(bytes))
