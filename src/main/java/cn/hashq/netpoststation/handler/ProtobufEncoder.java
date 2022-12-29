@@ -26,7 +26,6 @@ public class ProtobufEncoder extends MessageToByteEncoder<ProtoMsg.Message> {
 //        out.writeShort(ProtoConstant.VERSION_CODE);
         byte[] bytes = msg.toByteArray();
         int length = bytes.length;
-        log.info("encode length {}", length);
         out.writeInt(length);
         out.writeBytes(bytes);
     }

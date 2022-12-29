@@ -30,7 +30,6 @@ public class ProtobufDecoder extends ByteToMessageDecoder {
     }
 
     private Object decode0(ChannelHandlerContext ctx, ByteBuf in) throws InvalidFrameException, InvalidProtocolBufferException {
-        log.info("收到客户端发送数据报");
         in.markReaderIndex();
         if (in.readableBytes() < 8) {
             return null;
