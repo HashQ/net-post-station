@@ -100,8 +100,7 @@ public class AuthHandler extends BaseHandler {
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder();
         builder.setType(ProtoMsg.HeadType.CONFIG);
 
-        for (int i = 0; i < portMaps.size(); i++) {
-            PortMap portMap = portMaps.get(i);
+        for (PortMap portMap : portMaps) {
             ProtoMsg.Config config = ProtoMsg.Config.newBuilder()
                     .setClientPort(portMap.getClientPort())
                     .setServerPort(portMap.getServerPort()).build();
