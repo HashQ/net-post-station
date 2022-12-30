@@ -11,6 +11,7 @@ enum HeadType{
   CONFIG = 4;
   SERVICE_PAUSE = 5;
   AUTH_RESPONSE = 6;
+  PORT_CONNECT_BREAK = 7;
 }
 
 enum DataPackageType{

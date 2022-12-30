@@ -51,6 +51,10 @@ public final class ProtoMsg {
      * <code>AUTH_RESPONSE = 6;</code>
      */
     AUTH_RESPONSE(6),
+    /**
+     * <code>PORT_CONNECT_BREAK = 7;</code>
+     */
+    PORT_CONNECT_BREAK(7),
     UNRECOGNIZED(-1),
     ;
 
@@ -82,6 +86,10 @@ public final class ProtoMsg {
      * <code>AUTH_RESPONSE = 6;</code>
      */
     public static final int AUTH_RESPONSE_VALUE = 6;
+    /**
+     * <code>PORT_CONNECT_BREAK = 7;</code>
+     */
+    public static final int PORT_CONNECT_BREAK_VALUE = 7;
 
 
     public final int getNumber() {
@@ -109,6 +117,7 @@ public final class ProtoMsg {
         case 4: return CONFIG;
         case 5: return SERVICE_PAUSE;
         case 6: return AUTH_RESPONSE;
+        case 7: return PORT_CONNECT_BREAK;
         default: return null;
       }
     }
@@ -5091,12 +5100,13 @@ public final class ProtoMsg {
       "tation.dto.AuthResponse\022>\n\014data_package\030" +
       "\007 \001(\0132(.cn.hashq.netpoststation.dto.Data" +
       "Package\0225\n\005heart\030\010 \001(\0132&.cn.hashq.netpos" +
-      "tstation.dto.HeartBody*\212\001\n\010HeadType\022\010\n\004A" +
+      "tstation.dto.HeartBody*\242\001\n\010HeadType\022\010\n\004A" +
       "UTH\020\000\022\030\n\024CLIENT_DATA_REDIRECT\020\001\022\030\n\024SERVE" +
       "R_DATA_REDIRECT\020\002\022\016\n\nHEART_BEAT\020\003\022\n\n\006CON" +
       "FIG\020\004\022\021\n\rSERVICE_PAUSE\020\005\022\021\n\rAUTH_RESPONS" +
-      "E\020\006*3\n\017DataPackageType\022\017\n\013FROM_SERVER\020\000\022" +
-      "\017\n\013FROM_CLIENT\020\001B\nB\010ProtoMsgb\006proto3"
+      "E\020\006\022\026\n\022PORT_CONNECT_BREAK\020\007*3\n\017DataPacka" +
+      "geType\022\017\n\013FROM_SERVER\020\000\022\017\n\013FROM_CLIENT\020\001" +
+      "B\nB\010ProtoMsgb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

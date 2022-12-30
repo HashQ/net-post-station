@@ -40,6 +40,15 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ProtoMsg.Message msg = ProtoMsg.Message.newBuilder()
+                .setType(ProtoMsg.HeadType.PORT_CONNECT_BREAK)
+                .setSessionId(ctx.channel().id().asLongText())
+                .build();
+        ctx.channel().writeAndFlush(msg);
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         PortMap portMap = PortMapCache.getInstance().getPortMapByServerPort(port);
         String channelId = ctx.channel().id().asLongText();
