@@ -1,9 +1,9 @@
 package cn.hashq.netpoststation.handler.proxy;
 
+import cn.hashq.netpoststation.cache.ChannelCache;
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.handler.BaseHandler;
-import cn.hashq.netpoststation.session.ServerSession;
-import cn.hashq.netpoststation.session.SessionMap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +31,10 @@ public class ClientDataRedirectHandler extends BaseHandler {
     @Override
     public void process(ChannelHandlerContext ctx, ProtoMsg.Message msg) {
         ProtoMsg.DataPackage dataPackage = msg.getDataPackage();
+        String sessionId = msg.getSessionId();
         byte[] bytes = dataPackage.getBytes().toByteArray();
-        ServerSession session = SessionMap.inst().getSessionByServerPort(dataPackage.getPort()).get();
-        session.writeAndFlush(bytes);
+        Channel channel = ChannelCache.getInstance().getChannel(sessionId);
+        channel.writeAndFlush(bytes);
     }
 
 }

@@ -2580,9 +2580,14 @@ public final class ProtoMsg {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 port = 2;</code>
+     * <code>uint32 server_port = 1;</code>
      */
-    int getPort();
+    int getServerPort();
+
+    /**
+     * <code>uint32 client_port = 2;</code>
+     */
+    int getClientPort();
 
     /**
      * <code>bytes bytes = 3;</code>
@@ -2602,7 +2607,8 @@ public final class ProtoMsg {
       super(builder);
     }
     private DataPackage() {
-      port_ = 0;
+      serverPort_ = 0;
+      clientPort_ = 0;
       bytes_ = com.google.protobuf.ByteString.EMPTY;
     }
 
@@ -2630,9 +2636,14 @@ public final class ProtoMsg {
             case 0:
               done = true;
               break;
+            case 8: {
+
+              serverPort_ = input.readUInt32();
+              break;
+            }
             case 16: {
 
-              port_ = input.readUInt32();
+              clientPort_ = input.readUInt32();
               break;
             }
             case 26: {
@@ -2672,13 +2683,22 @@ public final class ProtoMsg {
               cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.class, cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.Builder.class);
     }
 
-    public static final int PORT_FIELD_NUMBER = 2;
-    private int port_;
+    public static final int SERVER_PORT_FIELD_NUMBER = 1;
+    private int serverPort_;
     /**
-     * <code>uint32 port = 2;</code>
+     * <code>uint32 server_port = 1;</code>
      */
-    public int getPort() {
-      return port_;
+    public int getServerPort() {
+      return serverPort_;
+    }
+
+    public static final int CLIENT_PORT_FIELD_NUMBER = 2;
+    private int clientPort_;
+    /**
+     * <code>uint32 client_port = 2;</code>
+     */
+    public int getClientPort() {
+      return clientPort_;
     }
 
     public static final int BYTES_FIELD_NUMBER = 3;
@@ -2704,8 +2724,11 @@ public final class ProtoMsg {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (port_ != 0) {
-        output.writeUInt32(2, port_);
+      if (serverPort_ != 0) {
+        output.writeUInt32(1, serverPort_);
+      }
+      if (clientPort_ != 0) {
+        output.writeUInt32(2, clientPort_);
       }
       if (!bytes_.isEmpty()) {
         output.writeBytes(3, bytes_);
@@ -2719,9 +2742,13 @@ public final class ProtoMsg {
       if (size != -1) return size;
 
       size = 0;
-      if (port_ != 0) {
+      if (serverPort_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, port_);
+          .computeUInt32Size(1, serverPort_);
+      }
+      if (clientPort_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, clientPort_);
       }
       if (!bytes_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -2743,8 +2770,10 @@ public final class ProtoMsg {
       cn.hashq.netpoststation.dto.ProtoMsg.DataPackage other = (cn.hashq.netpoststation.dto.ProtoMsg.DataPackage) obj;
 
       boolean result = true;
-      result = result && (getPort()
-          == other.getPort());
+      result = result && (getServerPort()
+          == other.getServerPort());
+      result = result && (getClientPort()
+          == other.getClientPort());
       result = result && getBytes()
           .equals(other.getBytes());
       result = result && unknownFields.equals(other.unknownFields);
@@ -2758,8 +2787,10 @@ public final class ProtoMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PORT_FIELD_NUMBER;
-      hash = (53 * hash) + getPort();
+      hash = (37 * hash) + SERVER_PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getServerPort();
+      hash = (37 * hash) + CLIENT_PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getClientPort();
       hash = (37 * hash) + BYTES_FIELD_NUMBER;
       hash = (53 * hash) + getBytes().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -2895,7 +2926,9 @@ public final class ProtoMsg {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        port_ = 0;
+        serverPort_ = 0;
+
+        clientPort_ = 0;
 
         bytes_ = com.google.protobuf.ByteString.EMPTY;
 
@@ -2925,7 +2958,8 @@ public final class ProtoMsg {
       @java.lang.Override
       public cn.hashq.netpoststation.dto.ProtoMsg.DataPackage buildPartial() {
         cn.hashq.netpoststation.dto.ProtoMsg.DataPackage result = new cn.hashq.netpoststation.dto.ProtoMsg.DataPackage(this);
-        result.port_ = port_;
+        result.serverPort_ = serverPort_;
+        result.clientPort_ = clientPort_;
         result.bytes_ = bytes_;
         onBuilt();
         return result;
@@ -2975,8 +3009,11 @@ public final class ProtoMsg {
 
       public Builder mergeFrom(cn.hashq.netpoststation.dto.ProtoMsg.DataPackage other) {
         if (other == cn.hashq.netpoststation.dto.ProtoMsg.DataPackage.getDefaultInstance()) return this;
-        if (other.getPort() != 0) {
-          setPort(other.getPort());
+        if (other.getServerPort() != 0) {
+          setServerPort(other.getServerPort());
+        }
+        if (other.getClientPort() != 0) {
+          setClientPort(other.getClientPort());
         }
         if (other.getBytes() != com.google.protobuf.ByteString.EMPTY) {
           setBytes(other.getBytes());
@@ -3010,28 +3047,54 @@ public final class ProtoMsg {
         return this;
       }
 
-      private int port_ ;
+      private int serverPort_ ;
       /**
-       * <code>uint32 port = 2;</code>
+       * <code>uint32 server_port = 1;</code>
        */
-      public int getPort() {
-        return port_;
+      public int getServerPort() {
+        return serverPort_;
       }
       /**
-       * <code>uint32 port = 2;</code>
+       * <code>uint32 server_port = 1;</code>
        */
-      public Builder setPort(int value) {
+      public Builder setServerPort(int value) {
         
-        port_ = value;
+        serverPort_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 port = 2;</code>
+       * <code>uint32 server_port = 1;</code>
        */
-      public Builder clearPort() {
+      public Builder clearServerPort() {
         
-        port_ = 0;
+        serverPort_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int clientPort_ ;
+      /**
+       * <code>uint32 client_port = 2;</code>
+       */
+      public int getClientPort() {
+        return clientPort_;
+      }
+      /**
+       * <code>uint32 client_port = 2;</code>
+       */
+      public Builder setClientPort(int value) {
+        
+        clientPort_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 client_port = 2;</code>
+       */
+      public Builder clearClientPort() {
+        
+        clientPort_ = 0;
         onChanged();
         return this;
       }
@@ -5017,23 +5080,23 @@ public final class ProtoMsg {
       "ientPort\030\002 \001(\r\"\026\n\004Auth\022\016\n\006secret\030\001 \001(\t\"\031" +
       "\n\tHeartBody\022\014\n\004body\030\001 \001(\t\":\n\014AuthRespons" +
       "e\022\016\n\006result\030\001 \001(\010\022\014\n\004code\030\002 \001(\r\022\014\n\004info\030" +
-      "\003 \001(\t\"*\n\013DataPackage\022\014\n\004port\030\002 \001(\r\022\r\n\005by" +
-      "tes\030\003 \001(\014\"\376\002\n\007Message\0223\n\004type\030\001 \001(\0162%.cn" +
-      ".hashq.netpoststation.dto.HeadType\022\020\n\010se" +
-      "quence\030\002 \001(\004\022\022\n\nsession_id\030\003 \001(\t\0223\n\006conf" +
-      "ig\030\004 \003(\0132#.cn.hashq.netpoststation.dto.C" +
-      "onfig\022/\n\004auth\030\005 \001(\0132!.cn.hashq.netpostst" +
-      "ation.dto.Auth\022;\n\010response\030\006 \001(\0132).cn.ha" +
-      "shq.netpoststation.dto.AuthResponse\022>\n\014d" +
-      "ata_package\030\007 \001(\0132(.cn.hashq.netpoststat" +
-      "ion.dto.DataPackage\0225\n\005heart\030\010 \001(\0132&.cn." +
-      "hashq.netpoststation.dto.HeartBody*\212\001\n\010H" +
-      "eadType\022\010\n\004AUTH\020\000\022\030\n\024CLIENT_DATA_REDIREC" +
-      "T\020\001\022\030\n\024SERVER_DATA_REDIRECT\020\002\022\016\n\nHEART_B" +
-      "EAT\020\003\022\n\n\006CONFIG\020\004\022\021\n\rSERVICE_PAUSE\020\005\022\021\n\r" +
-      "AUTH_RESPONSE\020\006*3\n\017DataPackageType\022\017\n\013FR" +
-      "OM_SERVER\020\000\022\017\n\013FROM_CLIENT\020\001B\nB\010ProtoMsg" +
-      "b\006proto3"
+      "\003 \001(\t\"F\n\013DataPackage\022\023\n\013server_port\030\001 \001(" +
+      "\r\022\023\n\013client_port\030\002 \001(\r\022\r\n\005bytes\030\003 \001(\014\"\376\002" +
+      "\n\007Message\0223\n\004type\030\001 \001(\0162%.cn.hashq.netpo" +
+      "ststation.dto.HeadType\022\020\n\010sequence\030\002 \001(\004" +
+      "\022\022\n\nsession_id\030\003 \001(\t\0223\n\006config\030\004 \003(\0132#.c" +
+      "n.hashq.netpoststation.dto.Config\022/\n\004aut" +
+      "h\030\005 \001(\0132!.cn.hashq.netpoststation.dto.Au" +
+      "th\022;\n\010response\030\006 \001(\0132).cn.hashq.netposts" +
+      "tation.dto.AuthResponse\022>\n\014data_package\030" +
+      "\007 \001(\0132(.cn.hashq.netpoststation.dto.Data" +
+      "Package\0225\n\005heart\030\010 \001(\0132&.cn.hashq.netpos" +
+      "tstation.dto.HeartBody*\212\001\n\010HeadType\022\010\n\004A" +
+      "UTH\020\000\022\030\n\024CLIENT_DATA_REDIRECT\020\001\022\030\n\024SERVE" +
+      "R_DATA_REDIRECT\020\002\022\016\n\nHEART_BEAT\020\003\022\n\n\006CON" +
+      "FIG\020\004\022\021\n\rSERVICE_PAUSE\020\005\022\021\n\rAUTH_RESPONS" +
+      "E\020\006*3\n\017DataPackageType\022\017\n\013FROM_SERVER\020\000\022" +
+      "\017\n\013FROM_CLIENT\020\001B\nB\010ProtoMsgb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5076,7 +5139,7 @@ public final class ProtoMsg {
     internal_static_cn_hashq_netpoststation_dto_DataPackage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_hashq_netpoststation_dto_DataPackage_descriptor,
-        new java.lang.String[] { "Port", "Bytes", });
+        new java.lang.String[] { "ServerPort", "ClientPort", "Bytes", });
     internal_static_cn_hashq_netpoststation_dto_Message_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_cn_hashq_netpoststation_dto_Message_fieldAccessorTable = new
