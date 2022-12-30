@@ -75,8 +75,6 @@ public class AuthHandler extends BaseHandler {
                     ctx.pipeline().addAfter("auth", "clientDataRedirect", clientDataRedirectHandler);
                     ctx.pipeline().addAfter("auth", "heartBeat", new HeartHandler());
                     ctx.pipeline().remove("auth");
-                    ProtoMsg.Message msg = buildConfigMsg(session);
-                    session.writeAndFlush(msg);
                 } else {
                     ServerSession.closeSession(ctx);
                 }
@@ -89,21 +87,6 @@ public class AuthHandler extends BaseHandler {
         });
     }
 
-    private ProtoMsg.Message buildConfigMsg(ServerSession session) {
-        List<PortMap> portMaps = PortMapCache.getInstance().getMap().values().stream()
-                .filter(e -> StrUtil.equals(session.getClientId(), e.getClientId()) && e.getStatus() == 1)
-                .collect(Collectors.toList());
-        ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder();
-        builder.setType(ProtoMsg.HeadType.CONFIG);
-
-        for (PortMap portMap : portMaps) {
-            ProtoMsg.Config config = ProtoMsg.Config.newBuilder()
-                    .setClientPort(portMap.getClientPort())
-                    .setServerPort(portMap.getServerPort()).build();
-            builder.addConfig(config);
-        }
-        return builder.build();
-    }
 
     private ProtoMsg.Message buildAuthResponse(long seq, ServerSession session, ProtoConstant.ResultCode code) {
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder()
