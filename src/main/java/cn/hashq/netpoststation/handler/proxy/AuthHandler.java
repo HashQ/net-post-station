@@ -37,9 +37,6 @@ public class AuthHandler extends BaseHandler {
     @Resource
     private ClientDataRedirectHandler clientDataRedirectHandler;
 
-    @Resource
-    private ServerDataRedirectHandler serverDataRedirectHandler;
-
 
     @Override
     public ProtoMsg.HeadType getHeadType() {
@@ -76,7 +73,6 @@ public class AuthHandler extends BaseHandler {
             public void onBack(Boolean r) {
                 if (r) {
                     ctx.pipeline().addAfter("auth", "clientDataRedirect", clientDataRedirectHandler);
-                    ctx.pipeline().addAfter("auth", "serverDataRedirect", serverDataRedirectHandler);
                     ctx.pipeline().addAfter("auth", "heartBeat", new HeartHandler());
                     ctx.pipeline().remove("auth");
                     ProtoMsg.Message msg = buildConfigMsg(session);

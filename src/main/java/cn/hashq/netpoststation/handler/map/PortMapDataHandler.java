@@ -1,5 +1,6 @@
 package cn.hashq.netpoststation.handler.map;
 
+import cn.hashq.netpoststation.cache.ChannelCache;
 import cn.hashq.netpoststation.cache.ClientCache;
 import cn.hashq.netpoststation.cache.PortMapCache;
 import cn.hashq.netpoststation.dto.ProtoMsg;
@@ -32,37 +33,30 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        if (ctx.channel().isActive()){
-            ServerSession session = new ServerSession(ctx.channel());
-            session.setServerPort(port);
-            session.reverseBind();
-            SessionMap.inst().addSession(session);
-        }
-    }
-
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
+        if (ctx.channel().isActive()) {
+            ChannelCache.getInstance().addChannel(ctx.channel());
+        }
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         PortMap portMap = PortMapCache.getInstance().getPortMapByServerPort(port);
+        String channelId = ctx.channel().id().asLongText();
         if (Objects.isNull(portMap)) {
             log.info("不存在{}端口映射", port);
-            ServerSession.closeSession(ctx);
+            ChannelCache.getInstance().removeChannel(channelId);
         }
         String clientId = portMap.getClientId();
         Client client = ClientCache.getInstance().getClientByClientId(clientId);
         if (Objects.isNull(client)) {
             log.info("{}端口对应客户端不存在", port);
-            ServerSession.closeSession(ctx);
+            ChannelCache.getInstance().removeChannel(channelId);
         }
         Optional<ServerSession> proxySession = SessionMap.inst().getSessionByClientId(clientId);
         if (!proxySession.isPresent()) {
             log.info("{}客户端未上线", client.getClientName());
-            ServerSession.closeSession(ctx);
+            ChannelCache.getInstance().removeChannel(channelId);
         }
         ByteBuf buf = (ByteBuf) msg;
         int length = buf.readableBytes();
@@ -73,10 +67,12 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
         byte[] bytes = new byte[length];
         buf.readBytes(bytes);
         ProtoMsg.DataPackage dataPackage = ProtoMsg.DataPackage.newBuilder()
-                .setPort(port)
+                .setServerPort(port)
+                .setClientPort(portMap.getClientPort())
                 .setBytes(ByteString.copyFrom(bytes))
                 .build();
         ProtoMsg.Message message = ProtoMsg.Message.newBuilder()
+                .setSessionId(channelId)
                 .setType(ProtoMsg.HeadType.SERVER_DATA_REDIRECT)
                 .setDataPackage(dataPackage)
                 .build();
