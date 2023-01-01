@@ -27,6 +27,8 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
 
     private int port;
 
+    private String clientId;
+
     public PortMapDataHandler(int port) {
         this.port = port;
     }
@@ -44,7 +46,8 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
                 .setType(ProtoMsg.HeadType.PORT_CONNECT_BREAK)
                 .setSessionId(ctx.channel().id().asLongText())
                 .build();
-        ctx.channel().writeAndFlush(msg);
+        ServerSession session = SessionMap.inst().getSession(clientId);
+        session.writeAndFlush(msg);
     }
 
     @Override
@@ -62,6 +65,7 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
             ChannelCache.getInstance().removeChannel(channelId);
         }
         ServerSession session = SessionMap.inst().getSession(clientId);
+        this.clientId = session.getClientId();
         if (!Objects.isNull(session)) {
             log.info("{}客户端未上线", client.getClientName());
             ChannelCache.getInstance().removeChannel(channelId);
