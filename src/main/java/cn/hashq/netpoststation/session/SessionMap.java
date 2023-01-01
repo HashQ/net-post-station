@@ -23,29 +23,16 @@ public final class SessionMap {
     }
 
     public void addSession(ServerSession session) {
-        map.put(session.getSessionId(), session);
+        map.put(session.getClientId(), session);
     }
 
-    public ServerSession getSession(String sessionId) {
-        return map.get(sessionId);
+    public ServerSession getSession(String clientId) {
+        return map.get(clientId);
     }
 
     public void removeSession(String sessionId) {
         if (!map.containsKey(sessionId)) return;
         map.remove(sessionId);
     }
-
-    public Optional<ServerSession> getSessionByServerPort(int serverPort) {
-        return map.values().stream()
-                .filter(e -> e.getServerPort() == serverPort)
-                .findFirst();
-    }
-
-    public Optional<ServerSession> getSessionByClientId(String clientId) {
-        return map.values().stream()
-                .filter(e -> StrUtil.equals(clientId, e.getClientId()))
-                .findFirst();
-    }
-
 
 }
