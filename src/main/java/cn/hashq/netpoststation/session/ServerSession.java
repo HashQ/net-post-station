@@ -1,6 +1,5 @@
 package cn.hashq.netpoststation.session;
 
-import cn.hutool.core.util.IdUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
