@@ -15,7 +15,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * 映射端口数据处理Handler
@@ -62,8 +61,8 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
             log.info("{}端口对应客户端不存在", port);
             ChannelCache.getInstance().removeChannel(channelId);
         }
-        Optional<ServerSession> proxySession = SessionMap.inst().getSessionByClientId(clientId);
-        if (!proxySession.isPresent()) {
+        ServerSession session = SessionMap.inst().getSession(clientId);
+        if (!Objects.isNull(session)) {
             log.info("{}客户端未上线", client.getClientName());
             ChannelCache.getInstance().removeChannel(channelId);
         }
@@ -85,6 +84,6 @@ public class PortMapDataHandler extends ChannelInboundHandlerAdapter {
                 .setType(ProtoMsg.HeadType.SERVER_DATA_REDIRECT)
                 .setDataPackage(dataPackage)
                 .build();
-        proxySession.get().writeAndFlush(message);
+        session.writeAndFlush(message);
     }
 }

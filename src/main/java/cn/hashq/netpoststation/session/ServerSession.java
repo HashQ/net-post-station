@@ -38,16 +38,6 @@ public class ServerSession {
      */
     private String clientId;
 
-    /**
-     * 服务端端口
-     */
-    private int serverPort;
-
-
-    /**
-     * 唯一标识
-     */
-    private final String sessionId;
 
     /**
      * 验证状态
@@ -58,7 +48,6 @@ public class ServerSession {
     public ServerSession(Channel channel) {
         // 正向绑定
         this.channel = channel;
-        this.sessionId = IdUtil.simpleUUID();
     }
 
     public ServerSession reverseBind() {
@@ -77,7 +66,7 @@ public class ServerSession {
         ServerSession session = ctx.channel().attr(ServerSession.SESSION_KEY).get();
         if (Objects.nonNull(session) && session.isAuth()) {
             session.close();
-            SessionMap.inst().removeSession(session.getSessionId());
+            SessionMap.inst().removeSession(session.getClientId());
         }
     }
 
