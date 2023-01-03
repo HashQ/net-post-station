@@ -58,10 +58,10 @@ public class AuthHandler extends BaseHandler {
                     return false;
                 }
                 // 判断客户端是否已连接，如果已经连接，则断开上一个连接
-                Optional<ServerSession> serverSession = SessionMap.inst().getSessionByClientId(client.getClientId());
-                if (serverSession.isPresent()) {
-                    serverSession.get().close();
-                    SessionMap.inst().removeSession(serverSession.get().getSessionId());
+                ServerSession serverSession = SessionMap.inst().getSession(client.getClientId());
+                if (Objects.nonNull(serverSession)) {
+                    serverSession.close();
+                    SessionMap.inst().removeSession(serverSession.getClientId());
                 }
                 session.setClientId(client.getClientId());
                 session.reverseBind();
@@ -91,8 +91,7 @@ public class AuthHandler extends BaseHandler {
     private ProtoMsg.Message buildAuthResponse(long seq, ServerSession session, ProtoConstant.ResultCode code) {
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder()
                 .setType(ProtoMsg.HeadType.AUTH_RESPONSE)
-                .setSequence(seq)
-                .setSessionId(session.getSessionId());
+                .setSequence(seq);
         ProtoMsg.AuthResponse.Builder response = ProtoMsg.AuthResponse.newBuilder()
                 .setCode(code.getCode());
         builder.setResponse(response.build());
