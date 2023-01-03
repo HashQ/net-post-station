@@ -16,7 +16,7 @@ public class ServerResponse<T> {
     /**
      * 响应码
      * 正常：200
-     * 异常：500
+     * 异常：500(服务器内部错误)
      */
     private int code;
 
@@ -52,8 +52,14 @@ public class ServerResponse<T> {
         return createFailedResult("");
     }
 
-    public static ServerResponse createFailedResult(String msg) {
+    public static ServerResponse createFailedResult( String msg) {
         return createFailedResult(null, msg);
+    }
+
+    public static ServerResponse createFailedResult(int code, String msg) {
+        ServerResponse failedResult = createFailedResult(null, msg);
+        failedResult.setCode(code);
+        return failedResult;
     }
 
     public static <T> ServerResponse createFailedResult(T data, String msg) {
