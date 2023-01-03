@@ -42,7 +42,7 @@ public class AuthHandler extends BaseHandler {
         ServerSession session = new ServerSession(ctx.channel());
         CallbackTaskSchedule.add(new CallbackTask<Boolean>() {
             @Override
-            public Boolean execute() throws Exception {
+            public Boolean execute() {
                 // 判断客户端是否存在
                 String secret = msg.getAuth().getSecret();
                 Client client = ClientCache.getInstance().getClientBySecret(secret);
