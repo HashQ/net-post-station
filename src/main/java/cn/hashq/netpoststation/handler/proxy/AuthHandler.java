@@ -1,27 +1,21 @@
 package cn.hashq.netpoststation.handler.proxy;
 
 import cn.hashq.netpoststation.cache.ClientCache;
-import cn.hashq.netpoststation.cache.PortMapCache;
 import cn.hashq.netpoststation.concurrent.CallbackTask;
 import cn.hashq.netpoststation.concurrent.CallbackTaskSchedule;
 import cn.hashq.netpoststation.constant.ProtoConstant;
 import cn.hashq.netpoststation.dto.ProtoMsg;
 import cn.hashq.netpoststation.entity.Client;
-import cn.hashq.netpoststation.entity.PortMap;
 import cn.hashq.netpoststation.handler.BaseHandler;
 import cn.hashq.netpoststation.session.ServerSession;
 import cn.hashq.netpoststation.session.SessionMap;
-import cn.hutool.core.util.StrUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * 验证客户端用Handler
@@ -54,7 +48,7 @@ public class AuthHandler extends BaseHandler {
                 Client client = ClientCache.getInstance().getClientBySecret(secret);
                 long seq = msg.getSequence();
                 if (Objects.isNull(client)) {
-                    session.writeAndFlush(buildAuthResponse(seq, session, ProtoConstant.ResultCode.AUTH_FAILED));
+                    session.writeAndFlush(buildAuthResponse(seq, ProtoConstant.ResultCode.AUTH_FAILED));
                     return false;
                 }
                 // 判断客户端是否已连接，如果已经连接，则断开上一个连接
@@ -65,7 +59,7 @@ public class AuthHandler extends BaseHandler {
                 }
                 session.setClientId(client.getClientId());
                 session.reverseBind();
-                session.writeAndFlush(buildAuthResponse(seq, session, ProtoConstant.ResultCode.SUCCESS));
+                session.writeAndFlush(buildAuthResponse(seq, ProtoConstant.ResultCode.SUCCESS));
                 return true;
             }
 
@@ -88,7 +82,7 @@ public class AuthHandler extends BaseHandler {
     }
 
 
-    private ProtoMsg.Message buildAuthResponse(long seq, ServerSession session, ProtoConstant.ResultCode code) {
+    private ProtoMsg.Message buildAuthResponse(long seq,ProtoConstant.ResultCode code) {
         ProtoMsg.Message.Builder builder = ProtoMsg.Message.newBuilder()
                 .setType(ProtoMsg.HeadType.AUTH_RESPONSE)
                 .setSequence(seq);
